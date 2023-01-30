@@ -33,10 +33,10 @@ namespace Goalify.Repositories
                         FROM Goals";
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        var varieties = new List<Goals>();
+                        var goals = new List<Goals>();
                         while (reader.Read())
                         {
-                            var goals = new Goals()
+                            var goal = new Goals()
                             {
                                 Id = reader.GetInt32(reader.GetOrdinal("Id")),
                                 //Name = reader.GetString(reader.GetOrdinal("Name")),
@@ -49,7 +49,7 @@ namespace Goalify.Repositories
                             //varieties.Add(variety);
                         }
 
-                        return varieties;
+                        return goals;
                     }
                 }
             }
