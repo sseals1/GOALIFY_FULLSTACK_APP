@@ -1,2 +1,2 @@
-﻿SELECT Id, Term
-                        FROM terms
+﻿SELECT userId, categoryId, priorityId, termId, milestoneId, goalDescription, goalObjectives, notes, goalDate
+                        FROM Goals
