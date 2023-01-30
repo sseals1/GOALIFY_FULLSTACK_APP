@@ -157,7 +157,7 @@ namespace Goalify.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "DELETE FROM Goals WHERE Id = @id";
+                    cmd.CommandText = "DELETE FROM Categories WHERE Id = @id";
                     cmd.Parameters.AddWithValue("@id", id);
 
                     cmd.ExecuteNonQuery();
