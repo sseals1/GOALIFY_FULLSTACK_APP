@@ -119,7 +119,7 @@ namespace Goalify.Repositories
             }
         }
 
-        public void Update(Goals goal)
+        public void Update(Categories categories)
         {
             using (var conn = Connection)
             {
@@ -127,25 +127,15 @@ namespace Goalify.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        UPDATE Goals 
-                           SET  = userId = @userId,
-                                  categoryId = @categoryId,
-                                  priorityId = @priorityId, 
-                                  termId = @termId, 
-                                  milestoneId = @milestoneId, 
-                                  goalDescription = @goalDescription, 
-                                  goalObjectives = @goalObjectives, 
-                                  notes = @notes, 
-                                  date = @dates
+                        UPDATE Categoriess 
+                           SET  = Id = @Id,
+                                  category = @category,
+                                  colorId = @colorId,                                   
                          WHERE Id = @id";
-                    cmd.Parameters.AddWithValue("@userId", goal.UserId);
-                    cmd.Parameters.AddWithValue("@categoryId", goal.CategoryId);
-                    cmd.Parameters.AddWithValue("@priorityId", goal.PriorityId);
-                    cmd.Parameters.AddWithValue("@termId", goal.TermId);
-                    cmd.Parameters.AddWithValue("@milestoneId", goal.MilestoneId);
-                    cmd.Parameters.AddWithValue("@goalDescription", goal.GoalDescription);
-                    cmd.Parameters.AddWithValue("@notes", goal.Notes);
-                    cmd.Parameters.AddWithValue("@date", goal.Date);
+                    cmd.Parameters.AddWithValue("@Id", categories.Id);
+                    cmd.Parameters.AddWithValue("@categoryId", categories.Category);
+                    cmd.Parameters.AddWithValue("@priorityId", categories.ColorId);
+                    
                     //if (variety.Notes == null)
                     //{
                     //    cmd.Parameters.AddWithValue("@notes", DBNull.Value);
