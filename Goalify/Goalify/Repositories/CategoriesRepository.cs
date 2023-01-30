@@ -34,19 +34,19 @@ namespace Goalify.Repositories
                         var categories = new List<Categories>();
                         while (reader.Read())
                         {
-                            var category = new Categories()
+                            categories.Add(new Categories()
                             {
                                 Id = DbUtils.GetInt(reader, "Id"),
                                 Category = DbUtils.GetString(reader, "Category"),
-                                ColorId = DbUtils.GetInt(reader, "Region")
-                            };
+                                ColorId = DbUtils.GetString(reader, "ColorId")
+                            });
                             //if (!reader.IsDBNull(reader.GetOrdinal("Notes")))
                             //{
                             //   variety.Notes = reader.GetString(reader.GetOrdinal("Notes"));
                             //}
                             //varieties.Add(variety);
                         }
-
+                        reader.Close();
                         return categories;
                     }
                 }
@@ -67,14 +67,14 @@ namespace Goalify.Repositories
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        Categories category = null;
+                        Categories categories = null;
                         if (reader.Read())
                         {
-                            category = new Categories()
+                            categories = new Categories()
                             {
                                 Id = DbUtils.GetInt(reader, "Id"),
                                 Category = DbUtils.GetString(reader, "CategoryId"),
-                                ColorId = DbUtils.GetInt(reader, "Id")
+                                ColorId = DbUtils.GetString(reader, "ColorId")
 
                             };
                             //if (!reader.IsDBNull(reader.GetOrdinal("Notes")))
@@ -83,13 +83,13 @@ namespace Goalify.Repositories
                             //}
                         }
 
-                        return category;
+                        return categories;
                     }
                 }
             }
         }
 
-        public void Add(Categories categories)
+        public void Add(Categories category)
         {
             using (var conn = Connection)
             {
@@ -100,9 +100,9 @@ namespace Goalify.Repositories
                         INSERT INTO Categories (Id,Category, ColorId)
                         OUTPUT INSERTED.ID
                         VALUES (@Id, @category, @colorId)";
-                    cmd.Parameters.AddWithValue("@userId", categories.Id);
-                    cmd.Parameters.AddWithValue("@categoryId", categories.Category);
-                    cmd.Parameters.AddWithValue("@priorityId", categories.ColorId);
+                    cmd.Parameters.AddWithValue("@userId", category.Id);
+                    cmd.Parameters.AddWithValue("@categoryId", category.Category);
+                    cmd.Parameters.AddWithValue("@priorityId", category.ColorId);
                     
 
                     //if (variety.Notes == null)
@@ -114,12 +114,13 @@ namespace Goalify.Repositories
                     //        cmd.Parameters.AddWithValue("@notes", variety.Notes);
                     //    }
 
-                    categories.Id = (int)cmd.ExecuteScalar();
+                    category.Id = (int)cmd.ExecuteScalar();
+                
                 }
             }
         }
 
-        public void Update(Categories categories)
+        public void Update(Categories category)
         {
             using (var conn = Connection)
             {
@@ -132,9 +133,9 @@ namespace Goalify.Repositories
                                   category = @category,
                                   colorId = @colorId,                                   
                          WHERE Id = @id";
-                    cmd.Parameters.AddWithValue("@Id", categories.Id);
-                    cmd.Parameters.AddWithValue("@categoryId", categories.Category);
-                    cmd.Parameters.AddWithValue("@priorityId", categories.ColorId);
+                    cmd.Parameters.AddWithValue("@Id", category.Id);
+                    cmd.Parameters.AddWithValue("@categoryId",  category.Category);
+                    cmd.Parameters.AddWithValue("@priorityId", category.ColorId);
                     
                     //if (variety.Notes == null)
                     //{
