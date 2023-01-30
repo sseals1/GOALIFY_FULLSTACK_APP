@@ -89,6 +89,93 @@ namespace Goalify.Repositories
             }
         }
 
+        public void Add(Categories categories)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        INSERT INTO Categories (Id,Category, ColorId)
+                        OUTPUT INSERTED.ID
+                        VALUES (@Id, @category, @colorId)";
+                    cmd.Parameters.AddWithValue("@userId", categories.Id);
+                    cmd.Parameters.AddWithValue("@categoryId", categories.Category);
+                    cmd.Parameters.AddWithValue("@priorityId", categories.ColorId);
+                    
+
+                    //if (variety.Notes == null)
+                    //    {
+                    //        cmd.Parameters.AddWithValue("@notes", DBNull.Value);
+                    //    }
+                    //    else
+                    //    {
+                    //        cmd.Parameters.AddWithValue("@notes", variety.Notes);
+                    //    }
+
+                    categories.Id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
+
+        public void Update(Goals goal)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        UPDATE Goals 
+                           SET  = userId = @userId,
+                                  categoryId = @categoryId,
+                                  priorityId = @priorityId, 
+                                  termId = @termId, 
+                                  milestoneId = @milestoneId, 
+                                  goalDescription = @goalDescription, 
+                                  goalObjectives = @goalObjectives, 
+                                  notes = @notes, 
+                                  date = @dates
+                         WHERE Id = @id";
+                    cmd.Parameters.AddWithValue("@userId", goal.UserId);
+                    cmd.Parameters.AddWithValue("@categoryId", goal.CategoryId);
+                    cmd.Parameters.AddWithValue("@priorityId", goal.PriorityId);
+                    cmd.Parameters.AddWithValue("@termId", goal.TermId);
+                    cmd.Parameters.AddWithValue("@milestoneId", goal.MilestoneId);
+                    cmd.Parameters.AddWithValue("@goalDescription", goal.GoalDescription);
+                    cmd.Parameters.AddWithValue("@notes", goal.Notes);
+                    cmd.Parameters.AddWithValue("@date", goal.Date);
+                    //if (variety.Notes == null)
+                    //{
+                    //    cmd.Parameters.AddWithValue("@notes", DBNull.Value);
+                    //}
+                    //else
+                    //{
+                    //    cmd.Parameters.AddWithValue("@notes", variety.Notes);
+                    //}
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void Delete(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "DELETE FROM Goals WHERE Id = @id";
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+
 
     }
 }

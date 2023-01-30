@@ -7,5 +7,8 @@ namespace Goalify.Repositories
     {
         Categories Get(int id);
         List<Categories> GetAll();
+        Categories Add(Categories category);
+        Categories Update(Categories category);
+        Categories Delete(int id);   
     }
 }
