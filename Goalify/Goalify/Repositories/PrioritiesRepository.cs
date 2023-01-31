@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace Goalify.Repositories
 {
-    public class PrioritiesRepository
+    public class PrioritiesRepository : IPrioritiesRepository
     {
         private readonly string _connectionString;
         public PrioritiesRepository(IConfiguration configuration)
