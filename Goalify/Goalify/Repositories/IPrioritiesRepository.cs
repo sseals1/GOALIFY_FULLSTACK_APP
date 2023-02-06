@@ -7,5 +7,9 @@ namespace Goalify.Repositories
     {
         Priorities Get(Priorities priority);
         List<Priorities> GetAll();
+        Priorities Get(int id);
+        void Add(Priorities priority);
+        void Update(Priorities priority);
+        void Delete(int id);
     }
 }
