@@ -70,7 +70,7 @@ namespace Goalify.Repositories
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        Goals goal = null;
+                         Goals goal = null;
                         if (reader.Read())
                         {
                             goal = new Goals()
