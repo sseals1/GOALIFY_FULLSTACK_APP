@@ -36,7 +36,7 @@ namespace Goalify.Repositories
                             tips.Add(new Tips()
                             {
                                 Id = DbUtils.GetInt(reader, "Id"),
-                                Tip = DbUtils.GetString(reader, "Term"),
+                                Tip = DbUtils.GetString(reader, "Tip"),
                                 Suggestions = DbUtils.GetString(reader, "Suggestions")
                             });
 
@@ -48,37 +48,39 @@ namespace Goalify.Repositories
             }
         }
 
-        //public Terms Get(Terms term)
-        //{
-        //    using (var conn = Connection)
-        //    {
-        //        conn.Open();
-        //        using (var cmd = conn.CreateCommand())
-        //        {
-        //            cmd.CommandText = @"
-        //                SELECT Id, Term
-        //                  FROM terms
-        //                 WHERE Term = @term;";
-        //            cmd.Parameters.AddWithValue("@term", term);
+        public Tips Get(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT Id, Tip, Suggestions
+                          FROM tips
+                         WHERE Id = @id;";
+                    cmd.Parameters.AddWithValue("@id", id);
 
-        //            using (SqlDataReader reader = cmd.ExecuteReader())
-        //            {
-        //                term = null;
-        //                if (reader.Read())
-        //                {
-        //                    term = new Terms()
-        //                    {
-        //                        Id = DbUtils.GetInt(reader, "Id"),
-        //                        Term = DbUtils.GetString(reader, "Term"),
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        Tips tip = null;
+                        if (reader.Read())
+                        {
+                            tip = new Tips()
+                            {
+                                Id = DbUtils.GetInt(reader, "Id"),
+                                Tip = DbUtils.GetString(reader, "Tip"),
+                                Suggestions = DbUtils.GetString(reader, "Suggestions")
 
-        //                    };
 
-        //                }
-        //                return term;
-        //            }
-        //        }
-        //    }
-        //}
+                            };
+
+                        }
+                        return tip;
+                    }
+                }
+            }
+        }
 
         //public void Add(Terms term)
         //{
