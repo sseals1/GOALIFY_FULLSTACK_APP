@@ -20,5 +20,20 @@ namespace Goalify.Controllers
         {
             return Ok(_tipsRepository.GetAll());
         }
+
+        // https://localhost:5001/api/tips/5
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            var tip = _tipsRepository.Get(id);
+            if (tip == null)
+            {
+                return NotFound();
+            }
+            return Ok(tip);
+        }
+
+
+
     }
 }
