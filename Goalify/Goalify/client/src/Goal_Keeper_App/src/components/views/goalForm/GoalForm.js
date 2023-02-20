@@ -7,23 +7,23 @@ import "./GoalForm.css";
 
 export const GoalForm = () => {
   const history = useHistory();
-  const [goalDescription, setGoalDescription] = useState("");
-  const [goalObjective, setGoalObjective] = useState("");
-  const [goalNotes, setGoalNotes] = useState("");
-  const [userId, setUserId] = useState("");
-  const [goalDate, setGoalDate] = useState("");
+  const [goalDescription, setGoalDescription] = useState([]);
+  const [goalObjective, setGoalObjective] = useState([]);
+  const [goalNotes, setGoalNotes] = useState([]);
+  const [userId, setUserId] = useState([]);
+  const [goalDate, setGoalDate] = useState([]);
   const [newGoal, setGoals] = useState({});
 
-  const [categoryId, setGoalCategory] = useState("");
+  const [categoryId, setGoalCategory] = useState([]);
   //   goalCategory is the key on the new object that is being created coming from the event.target.value
   const [category, setCategory] = useState([]);
   //   setCategory is setting state for the useEffect (bringing in categories)
   // category is table in the the db
 
-  const [priorityId, setGoalPriority] = useState("");
+  const [priorityId, setGoalPriority] = useState([]);
   const [priority, setPriority] = useState([]);
 
-  const [termId, setGoalTimeFrame] = useState("");
+  const [termId, setGoalTimeFrame] = useState([]);
   const [timeFrame, setTimeFrame] = useState([]);
 
   const [notes, setNotes] = useState("");
@@ -63,7 +63,7 @@ export const GoalForm = () => {
     };
     // console.log(goalObj);
     return (
-      fetch("http://localhost:8088/goals", fetchOption)
+      fetch("https://localhost:5001/api/goals", fetchOption)
         // the fetchOption object is being sent to the url in the return fetch
         .then(() => {
           history.push("/mygoals");
@@ -104,29 +104,25 @@ export const GoalForm = () => {
   };
 
   useEffect(() => {
-    GoalCategory()
-    .then((data) => {
+    GoalCategory().then((data) => {
       setCategory(data);
     });
   }, []);
 
   useEffect(() => {
-    GoalPriority()
-    .then((data) => [setPriority(data)]);
+    GoalPriority().then((data) => [setPriority(data)]);
   }, []);
 
   useEffect(() => {
-    TimeFrame()
-    .then((data) => {
+    TimeFrame().then((data) => {
       setTimeFrame(data);
     });
   }, []);
 
-  
   return (
-      <Container className="container">
-    <form className="goalForm">
-      <h4 className="goalForm__title">New Goal</h4>
+    <Container className="container">
+      <form className="goalForm">
+        <h4 className="goalForm__title">New Goal</h4>
         <fieldset>
           <div className="form-group">
             <label htmlFor="description">Enter a new goal to start:</label>
@@ -146,8 +142,8 @@ export const GoalForm = () => {
             />
           </div>
         </fieldset>
-      {/* </Container> */}
-      {/* <Container> */}
+        {/* </Container> */}
+        {/* <Container> */}
         <fieldset>
           <div className="form-group">
             <label htmlFor="name">Goal Objectives:</label>
@@ -163,8 +159,8 @@ export const GoalForm = () => {
             />
           </div>
         </fieldset>
-      {/* // </Container> */}
-      {/* <Container> */}
+        {/* // </Container> */}
+        {/* <Container> */}
         <fieldset>
           <div className="form-group">
             <label htmlFor="name">Goal Notes:</label>
@@ -180,27 +176,27 @@ export const GoalForm = () => {
             />
           </div>
         </fieldset>
-       {/* </Container> */}
-      {/* <Container> */}
-      <fieldset>
-        {/* <div className="form-date"> */}
-        <div className="form-group">
-          <label htmlFor="name">Projected Completion Date:</label>
-          <input
-            required
-            autoFocus
-            type="date"
-            className="form-control"
-            placeholder=""
-            onChange={(event) => {
-              setGoalDate(event.target.value);
-            }}
-          />
-        </div>
-      </fieldset>
-      {/* </Container> */}
-      <h6 className="goal-title">Select your goal options</h6>
-      {/* <Container> */}
+        {/* </Container> */}
+        {/* <Container> */}
+        <fieldset>
+          {/* <div className="form-date"> */}
+          <div className="form-group">
+            <label htmlFor="name">Projected Completion Date:</label>
+            <input
+              required
+              autoFocus
+              type="date"
+              className="form-control"
+              placeholder=""
+              onChange={(event) => {
+                setGoalDate(event.target.value);
+              }}
+            />
+          </div>
+        </fieldset>
+        {/* </Container> */}
+        <h6 className="goal-title">Select your goal options</h6>
+        {/* <Container> */}
         <fieldset>
           {/* <div className="drop-title">Select your goal options</div> */}
           <div className="form-group">
@@ -226,8 +222,8 @@ export const GoalForm = () => {
             </select>
           </div>
         </fieldset>
-       {/* </Container> */}
-      {/* <Container> */}
+        {/* </Container> */}
+        {/* <Container> */}
         <fieldset>
           <div className="form-group">
             {/* <div className="dropdown-group"> */}
@@ -251,8 +247,8 @@ export const GoalForm = () => {
             </select>
           </div>
         </fieldset>
-      {/* </Container> */}
-      {/* <Container> */}
+        {/* </Container> */}
+        {/* <Container> */}
         <fieldset>
           <div className="form-group">
             {/* <div className="dropdown-group"> */}
@@ -276,16 +272,16 @@ export const GoalForm = () => {
             </select>
           </div>
         </fieldset>
-      {/* </Container> */}
-      <div className="form-group">
-        {/* <div className="form-group"> */}
-        {formChecker(newGoal)}
-        {/* {toggleButton(newGoal)} */}
-        {/* invoking the function responsible for disableing the submit button untill all 
+        {/* </Container> */}
+        <div className="form-group">
+          {/* <div className="form-group"> */}
+          {formChecker(newGoal)}
+          {/* {toggleButton(newGoal)} */}
+          {/* invoking the function responsible for disableing the submit button untill all 
         form boxes have been filled.
         */}
-      </div>
-    </form>
+        </div>
+      </form>
     </Container>
   );
 };
