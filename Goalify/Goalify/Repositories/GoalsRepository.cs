@@ -75,15 +75,15 @@ namespace Goalify.Repositories
                         {
                             goal = new Goals()
                             {
-                                UserId = reader.GetInt32(reader.GetOrdinal("Id")),  
+                                UserId = reader.GetInt32(reader.GetOrdinal("UserId")),  
                                 CategoryId = DbUtils.GetInt(reader, "CategoryId"),
-                                PriorityId = reader.GetInt32(reader.GetOrdinal("Id")),
-                                TermId = reader.GetInt32(reader.GetOrdinal("Id")),
-                                MilestoneId = reader.GetInt32(reader.GetOrdinal("Id")),
-                                GoalDescription = reader.GetString(reader.GetOrdinal("Id")),
-                                GoalObjectives = reader.GetString(reader.GetOrdinal("Id")),
-                                Notes = reader.GetString(reader.GetOrdinal("Id")),  
-                                Date = reader.GetDateTime(reader.GetOrdinal("Id")), 
+                                PriorityId = reader.GetInt32(reader.GetOrdinal("PriorityId")),
+                                TermId = reader.GetInt32(reader.GetOrdinal("TermId")),
+                                //MilestoneId = reader.GetInt32(reader.GetOrdinal("Id")),
+                                GoalDescription = reader.GetString(reader.GetOrdinal("GoalDesription")),
+                                GoalObjectives = reader.GetString(reader.GetOrdinal("GoalObjectives")),
+                                Notes = reader.GetString(reader.GetOrdinal("Notes")),  
+                                goalDate = reader.GetDateTime(reader.GetOrdinal("goalDate"))
                             };
                             //if (!reader.IsDBNull(reader.GetOrdinal("Notes")))
                             //{
@@ -105,17 +105,18 @@ namespace Goalify.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        INSERT INTO Goal (userId,categoryId, priorityId, termId, milestoneId, goalDescription, goalObjectives, notes, date)
+                        INSERT INTO goals (UserId, MilestoneId, CategoryId, PriorityId, TermId, goalDescription, goalObjectives, Notes, goalDate)
                         OUTPUT INSERTED.ID
-                        VALUES (@userId, @categoryId, @priorityId, @termId, @milestoneId, @goalDescription, @notes, @date)";
+                        VALUES (@userId, @milestoneId, @categoryId, @priorityId, @termId, @goalDescription, @goalObjectives, @notes, @goalDate)";
                     cmd.Parameters.AddWithValue("@userId", goal.UserId);
                     cmd.Parameters.AddWithValue("@categoryId", goal.CategoryId);
                     cmd.Parameters.AddWithValue("@priorityId", goal.PriorityId);
                     cmd.Parameters.AddWithValue("@termId", goal.TermId);
-                    cmd.Parameters.AddWithValue("@milestoneId", goal.MilestoneId);
+                    cmd.Parameters.AddWithValue("@goalObjectives", goal.GoalObjectives);
                     cmd.Parameters.AddWithValue("@goalDescription", goal.GoalDescription);
+                    cmd.Parameters.AddWithValue("@milestoneId", goal.MilestoneId);
                     cmd.Parameters.AddWithValue("@notes", goal.Notes);
-                    cmd.Parameters.AddWithValue("@date", goal.Date);
+                    cmd.Parameters.AddWithValue("@goalDate", goal.goalDate);
 
                     //if (variety.Notes == null)
                     //    {
@@ -148,7 +149,7 @@ namespace Goalify.Repositories
                                   goalDescription = @goalDescription, 
                                   goalObjectives = @goalObjectives, 
                                   notes = @notes, 
-                                  date = @dates
+                                  date = @date
                          WHERE Id = @id";
                     cmd.Parameters.AddWithValue("@userId", goal.UserId);
                     cmd.Parameters.AddWithValue("@categoryId", goal.CategoryId);
@@ -157,7 +158,7 @@ namespace Goalify.Repositories
                     cmd.Parameters.AddWithValue("@milestoneId", goal.MilestoneId);
                     cmd.Parameters.AddWithValue("@goalDescription", goal.GoalDescription);
                     cmd.Parameters.AddWithValue("@notes", goal.Notes);
-                    cmd.Parameters.AddWithValue("@date", goal.Date);
+                    cmd.Parameters.AddWithValue("@date", goal.goalDate);
                     //if (variety.Notes == null)
                     //{
                     //    cmd.Parameters.AddWithValue("@notes", DBNull.Value);
