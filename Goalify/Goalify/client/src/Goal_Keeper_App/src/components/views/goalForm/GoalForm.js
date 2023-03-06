@@ -8,11 +8,12 @@ import "./GoalForm.css";
 export const GoalForm = () => {
   const history = useHistory();
   const [goalDescription, setGoalDescription] = useState([]);
-  const [goalObjective, setGoalObjective] = useState([]);
-  const [goalNotes, setGoalNotes] = useState([]);
+  const [goalObjectives, setGoalObjectives] = useState([]);
+  const [notes, setGoalNotes] = useState([]);
   const [userId, setUserId] = useState([]);
   const [goalDate, setGoalDate] = useState([]);
   const [newGoal, setGoals] = useState({});
+  // const [milestoneId, setMilestoneId] = useState([]);
 
   const [categoryId, setGoalCategory] = useState([]);
   //   goalCategory is the key on the new object that is being created coming from the event.target.value
@@ -26,27 +27,25 @@ export const GoalForm = () => {
   const [termId, setGoalTimeFrame] = useState([]);
   const [timeFrame, setTimeFrame] = useState([]);
 
-  const [notes, setNotes] = useState("");
+  // const [notes, setNotes] = useState("");
 
   const submitGoal = (captureEventToPreventDefaultBehavior) => {
     // This parameter "captureEventToPreventDefault" stops the default behavior of the
     // browser which in this case is to Submit the goal. By preventing the default browser behavior
     // the browser will display the other html.
     captureEventToPreventDefaultBehavior.preventDefault();
-    // getting the userId value from localStorage
 
     const goalObj = {
       // the goal object being updated with values from the state variable "goal"
       goalDescription,
-      goalObjective,
-      goalNotes,
+      goalObjectives,
       goalDate,
       userId: parseInt(localStorage.getItem("goal_keeper")),
+      // getting the userId value from localStorage
       categoryId,
       priorityId,
       termId,
       notes,
-
       // dot notation to create the value pairs on the new object keys
     };
 
@@ -67,6 +66,7 @@ export const GoalForm = () => {
         // the fetchOption object is being sent to the url in the return fetch
         .then(() => {
           history.push("/mygoals");
+
           // Once the object is sent to the API, the user is then
           // pushed/routed back to the /goals route that is
           // specified as goalList in the ApplicationViews component
@@ -78,8 +78,8 @@ export const GoalForm = () => {
   const toggleButton = (newGoal) => {
     const isEnabled =
       goalDescription.length > 0 &&
-      goalObjective.length > 0 &&
-      goalNotes.length > 0 &&
+      goalObjectives.length > 0 &&
+      notes.length > 0 &&
       goalDate.length > 0;
 
     // const booleanCheck = isEnabled
@@ -154,7 +154,7 @@ export const GoalForm = () => {
               className="form-control"
               placeholder="Brief description of goal objectives"
               onChange={(event) => {
-                setGoalObjective(event.target.value);
+                setGoalObjectives(event.target.value);
               }}
             />
           </div>

@@ -18,7 +18,7 @@ namespace Goalify.Models
 
             public int PriorityId { get; set; }
         public int TermId { get; set; }
-        public int MilestoneId { get; set; }
+        //public int MilestoneId { get; set; }
         public string GoalDescription { get; set; }
         public string GoalObjectives    { get; set; }
         public string Notes { get; set; }

@@ -42,7 +42,7 @@ namespace Goalify.Repositories
                                 CategoryId = DbUtils.GetInt(reader, "CategoryId"),
                                 PriorityId = reader.GetInt32(reader.GetOrdinal("PriorityId")),
                                 TermId = reader.GetInt32(reader.GetOrdinal("TermId")),
-                                MilestoneId = reader.GetInt32(reader.GetOrdinal("MilestoneId")),
+                                //MilestoneId = reader.GetInt32(reader.GetOrdinal("MilestoneId")),
                                 GoalDescription = reader.GetString(reader.GetOrdinal("GoalDescription")),
                                 GoalObjectives = reader.GetString(reader.GetOrdinal("GoalObjectives")),
                                 Notes = reader.GetString(reader.GetOrdinal("Notes")),
@@ -111,16 +111,16 @@ namespace Goalify.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        INSERT INTO goals (UserId, MilestoneId, CategoryId, PriorityId, TermId, goalDescription, goalObjectives, Notes, goalDate)
+                        INSERT INTO goals (UserId, CategoryId, PriorityId, TermId, goalDescription, goalObjectives, Notes, goalDate)
                         OUTPUT INSERTED.ID
-                        VALUES (@userId, @milestoneId, @categoryId, @priorityId, @termId, @goalDescription, @goalObjectives, @notes, @goalDate)";
+                        VALUES (@userId, @categoryId, @priorityId, @termId, @goalDescription, @goalObjectives, @notes, @goalDate)";
                     cmd.Parameters.AddWithValue("@userId", goal.UserId);
                     cmd.Parameters.AddWithValue("@categoryId", goal.CategoryId);
                     cmd.Parameters.AddWithValue("@priorityId", goal.PriorityId);
                     cmd.Parameters.AddWithValue("@termId", goal.TermId);
                     cmd.Parameters.AddWithValue("@goalObjectives", goal.GoalObjectives);
                     cmd.Parameters.AddWithValue("@goalDescription", goal.GoalDescription);
-                    cmd.Parameters.AddWithValue("@milestoneId", goal.MilestoneId);
+                    //cmd.Parameters.AddWithValue("@milestoneId", goal.MilestoneId);
                     cmd.Parameters.AddWithValue("@notes", goal.Notes);
                     cmd.Parameters.AddWithValue("@goalDate", goal.goalDate);
 
@@ -146,38 +146,31 @@ namespace Goalify.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        UPDATE Goals 
-                           SET  = userId = @userId,
-                                  categoryId = @categoryId,
-                                  priorityId = @priorityId, 
-                                  termId = @termId, 
-                                  milestoneId = @milestoneId, 
-                                  goalDescription = @goalDescription, 
-                                  goalObjectives = @goalObjectives, 
-                                  notes = @notes, 
-                                  date = @date
-                         WHERE Id = @id";
+                UPDATE Goals 
+                   SET userId = @userId,
+                       categoryId = @categoryId,
+                       priorityId = @priorityId, 
+                       termId = @termId, 
+                       milestoneId = @milestoneId, 
+                       goalDescription = @goalDescription, 
+                       goalObjectives = @goalObjectives, 
+                       notes = @notes, 
+                       goalDate = @goalDate
+                 WHERE Id = @id";
                     cmd.Parameters.AddWithValue("@userId", goal.UserId);
                     cmd.Parameters.AddWithValue("@categoryId", goal.CategoryId);
                     cmd.Parameters.AddWithValue("@priorityId", goal.PriorityId);
                     cmd.Parameters.AddWithValue("@termId", goal.TermId);
-                    cmd.Parameters.AddWithValue("@milestoneId", goal.MilestoneId);
+                    //cmd.Parameters.AddWithValue("@milestoneId", goal.MilestoneId);
                     cmd.Parameters.AddWithValue("@goalDescription", goal.GoalDescription);
                     cmd.Parameters.AddWithValue("@notes", goal.Notes);
-                    cmd.Parameters.AddWithValue("@date", goal.goalDate);
-                    //if (variety.Notes == null)
-                    //{
-                    //    cmd.Parameters.AddWithValue("@notes", DBNull.Value);
-                    //}
-                    //else
-                    //{
-                    //    cmd.Parameters.AddWithValue("@notes", variety.Notes);
-                    //}
-
+                    cmd.Parameters.AddWithValue("@goalDate", goal.goalDate);
+                    cmd.Parameters.AddWithValue("@id", goal.Id);
                     cmd.ExecuteNonQuery();
                 }
             }
         }
+
 
         public void Delete(int id)
         {
