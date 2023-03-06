@@ -74,8 +74,8 @@ export const GoalForm = () => {
     );
   };
 
-  const formChecker = (newGoalObj) => {
-    // const toggleButton = (newGoal) => {
+  // const formChecker = (newGoalObj) => {
+  const toggleButton = (newGoal) => {
     const isEnabled =
       goalDescription.length > 0 &&
       goalObjective.length > 0 &&
@@ -275,8 +275,8 @@ export const GoalForm = () => {
         {/* </Container> */}
         <div className="form-group">
           {/* <div className="form-group"> */}
-          {formChecker(newGoal)}
-          {/* {toggleButton(newGoal)} */}
+          {/*  {formChecker(newGoal)} */}
+          {toggleButton(newGoal)}
           {/* invoking the function responsible for disableing the submit button untill all 
         form boxes have been filled.
         */}

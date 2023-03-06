@@ -38,15 +38,21 @@ namespace Goalify.Repositories
                         {
                             var goal = new Goals()
                             {
-                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                                //Name = reader.GetString(reader.GetOrdinal("Name")),
-                                //Region = reader.GetString(reader.GetOrdinal("Region")),
+                                UserId = reader.GetInt32(reader.GetOrdinal("UserId")),
+                                CategoryId = DbUtils.GetInt(reader, "CategoryId"),
+                                PriorityId = reader.GetInt32(reader.GetOrdinal("PriorityId")),
+                                TermId = reader.GetInt32(reader.GetOrdinal("TermId")),
+                                MilestoneId = reader.GetInt32(reader.GetOrdinal("MilestoneId")),
+                                GoalDescription = reader.GetString(reader.GetOrdinal("GoalDescription")),
+                                GoalObjectives = reader.GetString(reader.GetOrdinal("GoalObjectives")),
+                                Notes = reader.GetString(reader.GetOrdinal("Notes")),
+                                goalDate = reader.GetDateTime(reader.GetOrdinal("goalDate"))
                             };
                             if (!reader.IsDBNull(reader.GetOrdinal("Notes")))
                             {
-                                //variety.Notes = reader.GetString(reader.GetOrdinal("Notes"));
+                                goal.Notes = reader.GetString(reader.GetOrdinal("Notes"));
                             }
-                            //varieties.Add(variety);
+                            goals.Add(goal);
                         }
 
                         return goals;
