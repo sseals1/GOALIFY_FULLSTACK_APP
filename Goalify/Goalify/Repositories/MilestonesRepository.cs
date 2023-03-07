@@ -19,44 +19,47 @@ namespace Goalify.Repositories
             get { return new SqlConnection(_connectionString); }
         }
 
-        //public List<Milestones> GetAll()
-        //{
-        //    using (var conn = Connection)
-        //    {
-        //        conn.Open();
-        //        using (var cmd = conn.CreateCommand())
-        //        {
-        //            cmd.CommandText = @"SELECT userId, categoryId, priorityId, termId, milestoneId, goalDescription, goalObjectives, notes, goalDate
-        //                FROM Goals";
-        //            using (SqlDataReader reader = cmd.ExecuteReader())
-        //            {
-        //                var goals = new List<Goals>();
-        //                while (reader.Read())
-        //                {
-        //                    var goal = new Goals()
-        //                    {
-        //                        UserId = reader.GetInt32(reader.GetOrdinal("UserId")),
-        //                        CategoryId = DbUtils.GetInt(reader, "CategoryId"),
-        //                        PriorityId = reader.GetInt32(reader.GetOrdinal("PriorityId")),
-        //                        TermId = reader.GetInt32(reader.GetOrdinal("TermId")),
-        //                        //MilestoneId = reader.GetInt32(reader.GetOrdinal("MilestoneId")),
-        //                        GoalDescription = reader.GetString(reader.GetOrdinal("GoalDescription")),
-        //                        GoalObjectives = reader.GetString(reader.GetOrdinal("GoalObjectives")),
-        //                        Notes = reader.GetString(reader.GetOrdinal("Notes")),
-        //                        goalDate = reader.GetDateTime(reader.GetOrdinal("goalDate"))
-        //                    };
-        //                    if (!reader.IsDBNull(reader.GetOrdinal("Notes")))
-        //                    {
-        //                        goal.Notes = reader.GetString(reader.GetOrdinal("Notes"));
-        //                    }
-        //                    goals.Add(goal);
-        //                }
+        public List<Milestones> GetAll()
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT progressNotes, directionNotes, definedNotes, featuresNotes, attainedNotes, direction, defined, progress, features, attained
+                          FROM Milestones
+                         WHERE Id = @id;";
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        var milestones = new List<Milestones>();
+                        while (reader.Read())
+                        {
+                            var milestone = new Milestones()
+                            {
+                                ProgressNotes = DbUtils.GetString(reader, "ProgresNotes"),
+                                DirectionNotes = DbUtils.GetString(reader, "DirectionNotes"),
+                                DefinedNotes = DbUtils.GetString(reader, "DefinedNotes"),
+                                FeaturesNotes = DbUtils.GetString(reader, "FeaturesNotes"),
+                                AttainedNotes = DbUtils.GetString(reader, "AttainedNotes"),
+                                Direction = DbUtils.Bool(reader, "Direction"),
+                                Defined = DbUtils.Bool(reader, "Defined"),
+                                Progress = DbUtils.Bool(reader, "goalDate"),
+                                Features = DbUtils.Bool(reader, "Features"),
+                                Attained = DbUtils.Bool(reader, "Attained")
+                            };
+                            //if (!reader.IsDBNull(reader.GetOrdinal("Notes")))
+                            //{
+                            //    goal.Notes = reader.GetString(reader.GetOrdinal("Notes"));
+                            //}
+                            milestones.Add(milestone);
+                        }
 
-        //                return goals;
-        //            }
-        //        }
-        //    }
-        //}
+                        return milestones;
+                    }
+                }
+            }
+        }
 
         public Milestones Get(int id)
         {
