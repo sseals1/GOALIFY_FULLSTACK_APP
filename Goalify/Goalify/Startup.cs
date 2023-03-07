@@ -27,7 +27,7 @@ namespace Goalify
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IMilestonesRepository, MilestonesRepository>();  
+            services.AddTransient<IMilestonesRepository, MilestonesRepository>();
             services.AddTransient<ITipsRepository, TipsRepository>();
             services.AddTransient<IPrioritiesRepository, PrioritiesRepository>();
             services.AddTransient<ICategoriesRepository, CategoriesRepository>();
@@ -38,6 +38,17 @@ namespace Goalify
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Goalify", Version = "v1" });
+            });
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAnyOrigin",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    });
             });
         }
 
@@ -51,7 +62,7 @@ namespace Goalify
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Goalify v1"));
             }
 
-            app.UseCors();
+            app.UseCors("AllowAnyOrigin");
             app.UseHttpsRedirection();
 
             app.UseRouting();

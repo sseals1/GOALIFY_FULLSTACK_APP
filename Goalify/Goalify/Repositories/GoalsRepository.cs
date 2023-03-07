@@ -69,7 +69,7 @@ namespace Goalify.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT userId, categoryId, priorityId, termId, milestoneId, goalDescription, goalObjectives, notes, date 
+                        SELECT userId, categoryId, priorityId, termId, milestoneId, goalDescription, goalObjectives, notes, goalDate 
                           FROM Goals
                          WHERE Id = @id;";
                     cmd.Parameters.AddWithValue("@id", id);
