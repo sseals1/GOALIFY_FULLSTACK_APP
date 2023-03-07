@@ -124,10 +124,16 @@ namespace Goalify.Utils
                 }
             }
 
-        internal static bool Bool(SqlDataReader reader, string v)
+        //public static bool Bool(SqlDataReader reader, string v)
+        //{
+        //    throw new NotImplementedException();
+        //}
+        public static bool Bool(SqlDataReader reader, string columnName)
         {
-            throw new NotImplementedException();
+            int columnIndex = reader.GetOrdinal(columnName); // Get the index of the column with the specified name
+            return !reader.IsDBNull(columnIndex) && reader.GetBoolean(columnIndex); // Check if the column is not null and return its boolean value
         }
+
     }
 }
 

@@ -10,8 +10,7 @@ namespace Goalify.Models
         public string DirectionNotes { get; set; }
         public string DefinedNotes { get; set; }
         public string FeaturesNotes {get; set;}
-
-    public string AttainedNotes { get; set; }
+        public string AttainedNotes { get; set; }
     public bool Progress { get; set; }
     public bool Direction { get; set; } 
     public bool Defined { get; set; }
