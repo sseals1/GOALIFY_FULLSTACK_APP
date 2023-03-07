@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace Goalify.Repositories
 {
-    public class MilestonesRepository
+    public class MilestonesRepository : IMilestonesRepository
     {
         private readonly string _connectionString;
         public MilestonesRepository(IConfiguration configuration)
@@ -84,12 +84,12 @@ namespace Goalify.Repositories
                                 ProgressNotes = DbUtils.GetString(reader, "ProgresNotes"),
                                 DirectionNotes = DbUtils.GetString(reader, "DirectionNotes"),
                                 DefinedNotes = DbUtils.GetString(reader, "DefinedNotes"),
-                                FeaturesNotes = DbUtils.GetString(reader, "FeaturesNotes"),              
+                                FeaturesNotes = DbUtils.GetString(reader, "FeaturesNotes"),
                                 AttainedNotes = DbUtils.GetString(reader, "AttainedNotes"),
                                 Direction = DbUtils.Bool(reader, "Direction"),
                                 Defined = DbUtils.Bool(reader, "Defined"),
                                 Progress = DbUtils.Bool(reader, "goalDate"),
-                                Features = DbUtils.Bool(reader,"Features"),
+                                Features = DbUtils.Bool(reader, "Features"),
                                 Attained = DbUtils.Bool(reader, "Attained")
 
                             };
