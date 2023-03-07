@@ -123,6 +123,11 @@ namespace Goalify.Utils
                     cmd.Parameters.AddWithValue(name, value);
                 }
             }
+
+        internal static bool Bool(SqlDataReader reader, string v)
+        {
+            throw new NotImplementedException();
         }
+    }
 }
 
