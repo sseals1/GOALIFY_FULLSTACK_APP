@@ -138,7 +138,7 @@ namespace Goalify.Repositories
             }
         }
 
-        public void Update(Goals goal)
+        public void Update(Milestones milestone)
         {
             using (var conn = Connection)
             {
@@ -146,26 +146,28 @@ namespace Goalify.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                UPDATE Goals 
-                   SET userId = @userId,
-                       categoryId = @categoryId,
-                       priorityId = @priorityId, 
-                       termId = @termId, 
-                       milestoneId = @milestoneId, 
-                       goalDescription = @goalDescription, 
-                       goalObjectives = @goalObjectives, 
-                       notes = @notes, 
-                       goalDate = @goalDate
+                UPDATE Milestones 
+                   SET progressNotes = @progressNotes,
+                       directionNotes = @directionNotes,
+                       definedNotes = @definedNotes, 
+                       featureNotes = @featureNotes, 
+                       attainedNotes = @attainedNotes, 
+                       direction = @direction, 
+                       defined = @defined, 
+                       progress = @progress, 
+                       features = @features,
+                       attained = @attained
                  WHERE Id = @id";
-                    cmd.Parameters.AddWithValue("@userId", goal.UserId);
-                    cmd.Parameters.AddWithValue("@categoryId", goal.CategoryId);
-                    cmd.Parameters.AddWithValue("@priorityId", goal.PriorityId);
-                    cmd.Parameters.AddWithValue("@termId", goal.TermId);
-                    //cmd.Parameters.AddWithValue("@milestoneId", goal.MilestoneId);
-                    cmd.Parameters.AddWithValue("@goalDescription", goal.GoalDescription);
-                    cmd.Parameters.AddWithValue("@notes", goal.Notes);
-                    cmd.Parameters.AddWithValue("@goalDate", goal.goalDate);
-                    cmd.Parameters.AddWithValue("@id", goal.Id);
+                    cmd.Parameters.AddWithValue("@progressNotes", milestone.ProgressNotes);
+                    cmd.Parameters.AddWithValue("@directionNotes", milestone.DirectionNotes);
+                    cmd.Parameters.AddWithValue("@definedNotes", milestone.DefinedNotes);
+                    cmd.Parameters.AddWithValue("@featuresNotes", milestone.FeaturesNotes);
+                    cmd.Parameters.AddWithValue("@attainedNotes", milestone.AttainedNotes);
+                    cmd.Parameters.AddWithValue("@direction", milestone.Direction);
+                    cmd.Parameters.AddWithValue("@defined", milestone.Defined);
+                    cmd.Parameters.AddWithValue("@progress", milestone.Progress);
+                    cmd.Parameters.AddWithValue("@features", milestone.Features);
+                    cmd.Parameters.AddWithValue("@attained", milestone.Attained);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -179,7 +181,7 @@ namespace Goalify.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "DELETE FROM Goals WHERE Id = @id";
+                    cmd.CommandText = "DELETE FROM Milestones WHERE Id = @id";
                     cmd.Parameters.AddWithValue("@id", id);
 
                     cmd.ExecuteNonQuery();
