@@ -2,19 +2,24 @@ import React, { useState } from "react";
 import { Route } from "react-router-dom";
 import { GoalForm } from "./views/goalForm/GoalForm";
 import { MyGoals } from "./views/goalForm/MyGoals";
-import { Goal, MileFilled } from "./views/milestone/MileFilled"
+import { Goal, MileFilled } from "./views/milestone/MileFilled";
 import { GoalList } from "./views/goalist/GoalList";
-import { GoalMilestone } from "./views/milestone/GoalMilestone"
+import { GoalMilestone } from "./views/milestone/GoalMilestone";
 import { Home } from "./views/home/Home";
-import { Tips } from "./views/suggestions/Tips"
-import { YearInReview } from "./views/review/YearInReview"
-import { FilterByWeek } from "./views/filteredGoals/FilterByWeek"
-import { FilterByMonth } from "./views/filteredGoals/FilterByMonth"
-import { GoalNotes } from "./views/notes/GoalNotes"
+import { Tips } from "./views/suggestions/Tips";
+import { YearInReview } from "./views/review/YearInReview";
+import { FilterByWeek } from "./views/filteredGoals/FilterByWeek";
+import { FilterByMonth } from "./views/filteredGoals/FilterByMonth";
+import { GoalNotes } from "./views/notes/GoalNotes";
+import { ChatbotComponent } from "./chatBot/ChatbotComponent";
 
 export const ApplicationViews = () => {
   return (
     <>
+      <Route exact path="/goalform">
+        <ChatbotComponent />
+      </Route>
+
       <Route exact path="/goals">
         <GoalList />
       </Route>
@@ -32,7 +37,7 @@ export const ApplicationViews = () => {
       </Route>
 
       <Route exact path="/review">
-       <YearInReview />
+        <YearInReview />
       </Route>
 
       <Route exact path="/mygoals">
@@ -58,11 +63,10 @@ export const ApplicationViews = () => {
       <Route exact path="/filterbymonth">
         <FilterByMonth />
       </Route>
-      
+
       <Route exact path="/goalnotes/:goalsId(\d+)">
         <GoalNotes />
       </Route>
-      
     </>
   );
 };
