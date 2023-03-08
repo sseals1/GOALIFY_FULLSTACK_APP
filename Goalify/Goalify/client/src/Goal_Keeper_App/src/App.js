@@ -1,14 +1,13 @@
 // import logo from './logo.svg';
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { NavigationBar } from './components/nav/NavigationBar'
-
-
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { NavigationBar } from "./components/nav/NavigationBar";
 
 function App() {
   return (
     <div className="App">
       <NavigationBar />
+
       {/* <header className="App-header">
         
         <img src={logo} className="App-logo" alt="logo" />

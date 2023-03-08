@@ -2,15 +2,17 @@ import { createChatBotMessage } from "react-chatbot-kit";
 
 const config = {
   initialMessages: [
-    createChatBotMessage("Hi, I'm Chatbot. How can I help you today?"),
+    createChatBotMessage(
+      "Hi, I'm Success Bot. How can I help you with your goals today?"
+    ),
   ],
   botName: "Chatbot",
   customStyles: {
     botMessageBox: {
-      backgroundColor: "#376B7E",
+      backgroundColor: "#f0ad4e",
     },
     chatButton: {
-      backgroundColor: "#376B7E",
+      backgroundColor: "#0275d8",
     },
   },
 };
