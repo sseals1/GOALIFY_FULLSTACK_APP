@@ -1,14 +1,31 @@
-// import logo from './logo.svg';
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { NavigationBar } from "./components/nav/NavigationBar";
+import { Chatbot } from "react-chatbot-kit";
 
 function App() {
+  const config = {
+    initialMessages: [
+      {
+        type: "text",
+        content: "Hello! I'm a chatbot. How can I assist you today?",
+      },
+    ],
+  };
+
   return (
     <div className="App">
       <NavigationBar />
+      <Chatbot config={config} />
+      <header className="App-header"></header>
+    </div>
+  );
+}
 
-      {/* <header className="App-header">
+export default App;
+
+// {
+/* <header className="App-header">
         
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -22,12 +39,8 @@ function App() {
         >
           Learn React
         </a>
-      </header> */}
-    </div>
-  );
-}
-
-export default App;
+      </header> */
+// }
 
 // import React from "react";
 // import Header from "./Header";
