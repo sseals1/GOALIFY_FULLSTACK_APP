@@ -1,0 +1,61 @@
+import React, { useState } from "react";
+import { createChatBotMessage } from "react-chatbot-kit";
+import axios from "axios";
+import { Chatbot } from "react-chatbot-kit";
+import config from "./chatbotConfig";
+import MessageParser from "./MessageParser";
+import ActionProvider from "./ActionProvider";
+
+const ChatbotAI = () => {
+  const [messages, setMessages] = useState([]);
+  const [showBot, toggleBot] = useState(false);
+
+  // create a new instance of the MessageParser class
+  const messageParser = new MessageParser();
+  // create a new instance of the ActionProvider class
+  const actionProvider = new ActionProvider(setMessages);
+
+  const handleSendMessage = async (message) => {
+    console.log("handleSendMessage called");
+
+    const response = await axios.post(
+      "https://api.openai.com/v1/engines/davinci-codex/completions",
+      {
+        prompt: message,
+        max_tokens: 60,
+        temperature: 0.5,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const answer = response.data.choices[0].text.trim();
+    console.log(answer);
+
+    const newMessage = createChatBotMessage(answer);
+    console.log(newMessage);
+
+    setMessages((prevMessages) => [...prevMessages, newMessage]);
+    console.log(messages);
+  };
+
+  return (
+    <div>
+      <button onClick={() => toggleBot(!showBot)}>Toggle Chatbot</button>
+      {showBot && (
+        <Chatbot
+          config={config}
+          messageParser={messageParser}
+          actionProvider={actionProvider}
+          handleSendMessage={handleSendMessage}
+        />
+      )}
+    </div>
+  );
+};
+
+export default ChatbotAI;

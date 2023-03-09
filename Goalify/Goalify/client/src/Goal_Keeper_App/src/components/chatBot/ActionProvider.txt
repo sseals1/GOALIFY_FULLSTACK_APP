@@ -1,8 +1,8 @@
 // ActionProvider.js
 class ActionProvider {
-  constructor(createChatBotMessage, setStateFunc) {
+  constructor(createChatBotMessage, setMessages) {
     this.createChatBotMessage = createChatBotMessage;
-    this.setState = setStateFunc;
+    this.setState = setMessages;
   }
 
   // Handles user messages related to goal setting
@@ -20,7 +20,7 @@ class ActionProvider {
       "- Set a deadline for achieving your goal"
     );
 
-    this.setState((prevState) => ({
+    this.setMessages((prevState) => ({
       ...prevState,
       messages: [
         ...prevState.messages,
@@ -47,7 +47,7 @@ class ActionProvider {
       "- Celebrate small wins along the way"
     );
 
-    this.setState((prevState) => ({
+    this.setMessages((prevState) => ({
       ...prevState,
       messages: [
         ...prevState.messages,
