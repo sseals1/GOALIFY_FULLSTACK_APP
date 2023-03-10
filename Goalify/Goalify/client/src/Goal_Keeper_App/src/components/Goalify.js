@@ -5,39 +5,32 @@ import { NavBar } from "./nav/NavBar";
 import { Login } from "./auth/Login";
 import { Register } from "./auth/Register";
 import "./Goalify.css";
-import { NavigationBar } from "./nav/NavigationBar"
-
+import { NavigationBar } from "./nav/NavigationBar";
 
 export const Goalify = () => (
   <>
-   
+    <Route
+      render={() => {
+        if (localStorage.getItem("goal_keeper")) {
+          return (
+            <>
+              <NavigationBar />
+              <NavBar />
+              <ApplicationViews />
+            </>
+          );
+        } else {
+          return <Redirect to="/login" />;
+        }
+      }}
+    />
 
-    
-      <Route
-        render={() => {
-          if (localStorage.getItem("goal_keeper")) {
-            return (
-              <>
-                <NavigationBar />
-                <NavBar />
-                <ApplicationViews />
-              </>
-            );
-          } else {
-            return <Redirect to="/login" />;
-          }
-        }}
-      />
-
-      <Route path="/login">
+    <Route path="/login">
       <Login />
-        </Route> 
+    </Route>
 
-      <Route path="/register">
+    <Route path="/register">
       <Register />
-      </Route>
-    
-
-    
+    </Route>
   </>
 );

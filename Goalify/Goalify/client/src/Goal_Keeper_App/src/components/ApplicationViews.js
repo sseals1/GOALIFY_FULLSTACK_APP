@@ -12,12 +12,17 @@ import { FilterByWeek } from "./views/filteredGoals/FilterByWeek";
 import { FilterByMonth } from "./views/filteredGoals/FilterByMonth";
 import { GoalNotes } from "./views/notes/GoalNotes";
 // import { ChatbotComponent } from "./chatBot/ChatbotComponent";
+// import Chatbot3 from "./chatbot3/Chatbot3";
 
 export const ApplicationViews = () => {
   return (
     <>
       {/* <Route exact path="/goalform">
         <ChatbotComponent />
+      </Route> */}
+
+      {/* <Route exact path="/">
+        <Chatbot3 />
       </Route> */}
 
       <Route exact path="/goals">

@@ -11,6 +11,8 @@ import {
 import "bootstrap/dist/css/bootstrap.min.css";
 import { getTips, GoalTips } from "../ApiManager";
 import { Link, useHistory } from "react-router-dom";
+import { Chatbot3 } from "../chatbot3/Chatbot3";
+import config from "../chatbot3/ChatbotConfig";
 
 export const NavigationBar = () => {
   const [suggestions, setSuggestions] = useState([]);
@@ -44,29 +46,13 @@ export const NavigationBar = () => {
                   );
                 })}
                 {/* <NavDropdown.Item href="#action/3.1">
-                  Action
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                  Another action
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">
-                  Something
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.4">
+                </NavDropdown.Item> */}
+                {/* // <NavDropdown.Item href="#action/3.4">
                   Separated link
                 </NavDropdown.Item> */}
               </NavDropdown>
             </Nav>
             <Nav>
-              {/* <Link to="#" 
-                onClick={
-                    () => {
-                        localStorage.removeItem("goal_keeper")
-                        }
-                    }>
-                    Logout
-                </Link> */}
-
               <Nav.Link
                 onClick={() => {
                   localStorage.removeItem("goal_keeper");
@@ -77,6 +63,9 @@ export const NavigationBar = () => {
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
+          <div>
+            <Chatbot3 config={config} />
+          </div>
         </Container>
       </Navbar>
     </>
