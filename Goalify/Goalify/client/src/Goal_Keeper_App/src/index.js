@@ -10,6 +10,7 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Goalify />
+      {/* <App /> */}
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
