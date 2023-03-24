@@ -11,8 +11,8 @@ import {
 import "bootstrap/dist/css/bootstrap.min.css";
 import { getTips, GoalTips } from "../ApiManager";
 import { Link, useHistory } from "react-router-dom";
+import config from "../chatbot3/config";
 import { Chatbot3 } from "../chatbot3/Chatbot3";
-import config from "../chatbot3/ChatbotConfig";
 
 export const NavigationBar = () => {
   const [suggestions, setSuggestions] = useState([]);

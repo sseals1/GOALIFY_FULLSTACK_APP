@@ -16,7 +16,7 @@ function App() {
   return (
     <div className="App">
       <NavigationBar />
-      <Chatbot config={config} />
+      <Chatbot3 />
       <header className="App-header"></header>
     </div>
   );

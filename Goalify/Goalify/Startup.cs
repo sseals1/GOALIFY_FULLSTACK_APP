@@ -8,6 +8,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using OpenAI.GPT3.Interfaces;
+using OpenAI.GPT3.Managers;
+using OpenAI.GPT3;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +30,7 @@ namespace Goalify
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IOpenAIService>(new OpenAIService(new OpenAiOptions() { ApiKey = "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" }));
             services.AddTransient<IMilestonesRepository, MilestonesRepository>();
             services.AddTransient<ITipsRepository, TipsRepository>();
             services.AddTransient<IPrioritiesRepository, PrioritiesRepository>();
@@ -66,6 +70,7 @@ namespace Goalify
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
 
             app.UseAuthorization();
 
