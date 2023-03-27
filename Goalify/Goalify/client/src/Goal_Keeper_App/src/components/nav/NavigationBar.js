@@ -11,8 +11,7 @@ import {
 import "bootstrap/dist/css/bootstrap.min.css";
 import { getTips, GoalTips } from "../ApiManager";
 import { Link, useHistory } from "react-router-dom";
-import config from "../chatbot3/config";
-import { Chatbot3 } from "../chatbot3/Chatbot3";
+import OpenAIChatbot from "../OpenAIChatBot/OpenAIChatBot";
 
 export const NavigationBar = () => {
   const [suggestions, setSuggestions] = useState([]);
@@ -64,7 +63,7 @@ export const NavigationBar = () => {
             </Nav>
           </Navbar.Collapse>
           <div>
-            <Chatbot3 config={config} />
+            <OpenAIChatbot />
           </div>
         </Container>
       </Navbar>
