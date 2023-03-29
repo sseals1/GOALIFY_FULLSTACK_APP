@@ -24,49 +24,57 @@ export const NavigationBar = () => {
 
   return (
     <>
-      <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
-        <Container>
-          <Navbar.Brand href="/home">Goalify</Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link href="/goalform">Create A Goal</Nav.Link>
-              <Nav.Link href="/mygoals">My Goals</Nav.Link>
-              <Nav.Link href="/review">Year In Review</Nav.Link>
-              <NavDropdown
-                title="Goalsetting Tips"
-                id="collasible-nav-dropdown"
-              >
-                {suggestions.map((data) => {
-                  return (
-                    <NavDropdown.Item key={data.id} href={`/tips/${data.id}`}>
-                      {data.suggestion}
-                    </NavDropdown.Item>
-                  );
-                })}
-                {/* <NavDropdown.Item href="#action/3.1">
+      <div className="container-fluid">
+        <Navbar
+          collapseOnSelect
+          expand="lg"
+          bg="primary"
+          variant="dark"
+          className="justify-content-between"
+        >
+          <Container>
+            <Navbar.Brand href="/home">Goalify</Navbar.Brand>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
+              <Nav className="me-auto">
+                <Nav.Link href="/goalform">Create A Goal</Nav.Link>
+                <Nav.Link href="/mygoals">My Goals</Nav.Link>
+                <Nav.Link href="/review">Year In Review</Nav.Link>
+                <NavDropdown
+                  title="Goalsetting Tips"
+                  id="collasible-nav-dropdown"
+                >
+                  {suggestions.map((data) => {
+                    return (
+                      <NavDropdown.Item key={data.id} href={`/tips/${data.id}`}>
+                        {data.suggestion}
+                      </NavDropdown.Item>
+                    );
+                  })}
+                  {/* <NavDropdown.Item href="#action/3.1">
                 </NavDropdown.Item> */}
-                {/* // <NavDropdown.Item href="#action/3.4">
+                  {/* // <NavDropdown.Item href="#action/3.4">
                   Separated link
                 </NavDropdown.Item> */}
-              </NavDropdown>
-            </Nav>
-            <Nav>
-              <Nav.Link
-                onClick={() => {
-                  localStorage.removeItem("goal_keeper");
-                }}
-                href="/login"
-              >
-                Logout
-              </Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-          <div>
-            <OpenAIChatbot />
-          </div>
-        </Container>
-      </Navbar>
+                </NavDropdown>
+              </Nav>
+              <Nav>
+                <Nav.Link
+                  onClick={() => {
+                    localStorage.removeItem("goal_keeper");
+                  }}
+                  href="/login"
+                >
+                  <div>Logout</div>
+                </Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+            {/* <div className="mx-3 col-md-3 offset-md-3">
+              <OpenAIChatbot />
+            </div> */}
+          </Container>
+        </Navbar>
+      </div>
     </>
   );
 };

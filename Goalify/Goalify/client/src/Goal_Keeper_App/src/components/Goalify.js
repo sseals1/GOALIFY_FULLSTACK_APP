@@ -6,6 +6,7 @@ import { Login } from "./auth/Login";
 import { Register } from "./auth/Register";
 import "./Goalify.css";
 import { NavigationBar } from "./nav/NavigationBar";
+import OpenAIChatbot from "./OpenAIChatBot/OpenAIChatBot";
 
 export const Goalify = () => (
   <>
@@ -15,8 +16,10 @@ export const Goalify = () => (
           return (
             <>
               <NavigationBar />
-              <NavBar />
-              <ApplicationViews />
+              <div className="container display-flex justify-content-between">
+                <OpenAIChatbot />
+                <ApplicationViews />
+              </div>
             </>
           );
         } else {
