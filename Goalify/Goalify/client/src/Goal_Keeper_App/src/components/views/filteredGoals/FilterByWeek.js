@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { GetAllGoals, ListOfGoals } from "../../ApiManager";
-import "./FilterBy.css"
+import "./FilterBy.css";
+import { useHistory } from "react-router-dom";
 
 export const FilterByWeek = () => {
   const [goallist, setGoalList] = useState([]);
-
+  const history = useHistory();
   useEffect(() => {
     ListOfGoals().then((data) => {
       setGoalList(data);
@@ -12,28 +13,39 @@ export const FilterByWeek = () => {
     });
   }, []);
 
-  let date = new Date()
-  date.setDate(date.getDate() + 7) 
-  
+  let date = new Date();
+  date.setDate(date.getDate() + 7);
+
   return (
     <>
+      <button
+        className="btn btn-primary"
+        onClick={() => {
+          history.push("/goals");
+        }}
+      >
+        Back
+      </button>
       <div key="filter-week">
-          {<h4 className="title">This weeks goals</h4>}
-        {
-          (goallist.filter((goal) => {
-              const goalDate = new Date(goal.goalDate)
-              const isInRange = goalDate <= date
-              return isInRange
-            })
-            .map((filteredGoal) => (
-              <div style={{whiteSpace: 'pre-line'}} className="goal" key={filteredGoal.id}>
-               <p className="goal">
-               {filteredGoal.goalDescription}{filteredGoal.goalDate}
-               </p>
-              </div>
-              
-            )))
-        }
+        {<h4 className="title">This weeks goals</h4>}
+        {goallist
+          .filter((goal) => {
+            const goalDate = new Date(goal.goalDate);
+            const isInRange = goalDate <= date;
+            return isInRange;
+          })
+          .map((filteredGoal) => (
+            <div
+              style={{ whiteSpace: "pre-line" }}
+              className="goal"
+              key={filteredGoal.id}
+            >
+              <p className="goal">
+                {filteredGoal.goalDescription}
+                {filteredGoal.goalDate}
+              </p>
+            </div>
+          ))}
       </div>
       {console.log()}
     </>
