@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { ListOfGoals } from "../../ApiManager";
+import { useHistory } from "react-router-dom";
 
 export const FilterByMonth = () => {
   const [goalList, setGoalList] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     ListOfGoals().then((data) => {
@@ -26,8 +28,16 @@ export const FilterByMonth = () => {
   date.setDate(date.getDate() + 30);
   return (
     <>
+      <button
+        className="btn btn-primary"
+        onClick={() => {
+          history.push("/goals");
+        }}
+      >
+        Back
+      </button>
       <div key="filter-month">
-      {<h4 className="title">This Months goals</h4>}
+        {<h4 className="title">This Months goals</h4>}
         {goalList
           .filter((goal) => {
             const goalDate = new Date(goal.goalDate);

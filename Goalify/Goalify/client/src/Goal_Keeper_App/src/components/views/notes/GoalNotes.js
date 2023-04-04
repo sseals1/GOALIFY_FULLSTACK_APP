@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { GetGoal } from "../../ApiManager";
 import { useParams, useHistory } from "react-router-dom";
 import { Container } from "react-bootstrap";
-import "./GoalNotes.css"
+import "./GoalNotes.css";
 
 export const GoalNotes = () => {
   let [goalNotes, setGoalNotes] = useState({});
@@ -11,34 +11,33 @@ export const GoalNotes = () => {
   const history = useHistory();
 
   useEffect(() => {
-    GetGoal(goalsId)
-    .then((data) => {
+    GetGoal(goalsId).then((data) => {
       setGoals(data);
-      console.log(data)
+      console.log(data);
     });
   }, [goalsId]);
 
   const editNotes = (e) => {
-      e.preventDefault();
+    e.preventDefault();
     const noteObj = {
-        ...goals,   
-        notes: goalNotes,
+      ...goals,
+      notes: goalNotes,
     };
 
-    fetch(`http://localhost:8088/goals/${goalsId}`, {
+    fetch(`http://localhost:5001/goals/${goalsId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(noteObj),
     }).then(() => {
+      console.log(noteObj);
       history.push("/mygoals");
     });
   };
 
-  
   return (
-      <>
+    <>
       <Container className="container">
         <form className="goalForm">
           <h4 className="goalForm__title">Edit Goal Notes</h4>
@@ -56,10 +55,12 @@ export const GoalNotes = () => {
                 placeholder="Writes notes here"
                 // The onChange event listener is used to capture the user input from the DOM
                 onChange={(event) => {
-                    setGoalNotes(event.target.value);
+                  setGoalNotes(event.target.value);
                 }}
-                />
-                <button className="update-btn" onClick={editNotes}>Submit</button>
+              />
+              <button className="update-btn" onClick={editNotes}>
+                Submit
+              </button>
             </div>
           </fieldset>
         </form>

@@ -29,7 +29,7 @@ namespace Goalify.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT userId, categoryId, priorityId, termId, milestoneId, goalDescription, goalObjectives, notes, goalDate
+                    cmd.CommandText = @"SELECT id, userId, categoryId, priorityId, termId, milestoneId, goalDescription, goalObjectives, notes, goalDate
                         FROM Goals";
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -38,6 +38,7 @@ namespace Goalify.Repositories
                         {
                             var goal = new Goals()
                             {
+                                Id = DbUtils.GetInt(reader, ("Id")),
                                 UserId = reader.GetInt32(reader.GetOrdinal("UserId")),
                                 CategoryId = DbUtils.GetInt(reader, "CategoryId"),
                                 PriorityId = reader.GetInt32(reader.GetOrdinal("PriorityId")),
@@ -62,7 +63,7 @@ namespace Goalify.Repositories
         }
 
         public Goals Get(int id)
-        {
+         {
             using (var conn = Connection)
             {
                 conn.Open();
@@ -86,7 +87,7 @@ namespace Goalify.Repositories
                                 PriorityId = reader.GetInt32(reader.GetOrdinal("PriorityId")),
                                 TermId = reader.GetInt32(reader.GetOrdinal("TermId")),
                                 //MilestoneId = reader.GetInt32(reader.GetOrdinal("Id")),
-                                GoalDescription = reader.GetString(reader.GetOrdinal("GoalDesription")),
+                                GoalDescription = DbUtils.GetString(reader, "GoalDescription"),
                                 GoalObjectives = reader.GetString(reader.GetOrdinal("GoalObjectives")),
                                 Notes = reader.GetString(reader.GetOrdinal("Notes")),  
                                 goalDate = reader.GetDateTime(reader.GetOrdinal("goalDate"))
@@ -101,7 +102,7 @@ namespace Goalify.Repositories
                     }
                 }
             }
-        }
+        } 
 
         public void Add(Goals goal)
         {

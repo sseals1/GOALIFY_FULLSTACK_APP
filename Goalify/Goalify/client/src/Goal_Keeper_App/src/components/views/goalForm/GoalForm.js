@@ -93,7 +93,7 @@ export const GoalForm = () => {
       <div className="btn-shift-right">
         <button
           disabled={!isEnabled}
-          className="track_goal-btn"
+          className="btn btn-primary"
           // onFocus={alert("test")}
           onClick={submitGoal}
         >
@@ -122,7 +122,7 @@ export const GoalForm = () => {
   return (
     <Container className="container">
       <form className="goalForm">
-        <h4 className="goalForm__title">New Goal</h4>
+        {/* np<h4 className="goalForm__title">Create A New Goal</h4> */}
         <fieldset>
           <div className="form-group">
             <label htmlFor="description">Enter a new goal to start:</label>
@@ -195,7 +195,7 @@ export const GoalForm = () => {
           </div>
         </fieldset>
         {/* </Container> */}
-        <h6 className="goal-title">Select your goal options</h6>
+        <h6 className="goal-title">SELECT GOAL PARAMETERS</h6>
         {/* <Container> */}
         <fieldset>
           {/* <div className="drop-title">Select your goal options</div> */}
