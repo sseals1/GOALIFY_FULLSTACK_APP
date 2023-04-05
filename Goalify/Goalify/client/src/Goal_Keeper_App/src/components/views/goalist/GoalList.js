@@ -154,6 +154,7 @@ export const GoalList = () => {
       setGoalList(
         data.filter((item) => {
           return item.userId === parseInt(localStorage.getItem("goal_keeper"));
+          console.log(item);
         })
       );
     });
