@@ -19,12 +19,14 @@ export const GoalNotes = () => {
 
   const editNotes = (e) => {
     e.preventDefault();
+    // const goal = goals.find((goal) => goal.id === goalsId);
     const noteObj = {
       ...goals,
       notes: goalNotes,
     };
+    console.log(goals);
 
-    fetch(`http://localhost:5001/goals/${goalsId}`, {
+    fetch(`https://localhost:5001/api/goals/${goalsId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

@@ -70,7 +70,7 @@ namespace Goalify.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT userId, categoryId, priorityId, termId, milestoneId, goalDescription, goalObjectives, notes, goalDate 
+                        SELECT id, userId, categoryId, priorityId, termId, milestoneId, goalDescription, goalObjectives, notes, goalDate 
                           FROM Goals
                          WHERE Id = @id;";
                     cmd.Parameters.AddWithValue("@id", id);
@@ -82,6 +82,7 @@ namespace Goalify.Repositories
                         {
                             goal = new Goals()
                             {
+                                Id = DbUtils.GetInt(reader,"id"),
                                 UserId = reader.GetInt32(reader.GetOrdinal("UserId")),  
                                 CategoryId = DbUtils.GetInt(reader, "CategoryId"),
                                 PriorityId = reader.GetInt32(reader.GetOrdinal("PriorityId")),
@@ -94,7 +95,7 @@ namespace Goalify.Repositories
                             };
                             //if (!reader.IsDBNull(reader.GetOrdinal("Notes")))
                             //{
-                            //    variety.Notes = reader.GetString(reader.GetOrdinal("Notes"));
+                            //    goal.Notes = reader.GetString(reader.GetOrdinal("Notes"));
                             //}
                         }
 
@@ -151,8 +152,7 @@ namespace Goalify.Repositories
                    SET userId = @userId,
                        categoryId = @categoryId,
                        priorityId = @priorityId, 
-                       termId = @termId, 
-                       milestoneId = @milestoneId, 
+                       termId = @termId,                         
                        goalDescription = @goalDescription, 
                        goalObjectives = @goalObjectives, 
                        notes = @notes, 
@@ -164,6 +164,7 @@ namespace Goalify.Repositories
                     cmd.Parameters.AddWithValue("@termId", goal.TermId);
                     //cmd.Parameters.AddWithValue("@milestoneId", goal.MilestoneId);
                     cmd.Parameters.AddWithValue("@goalDescription", goal.GoalDescription);
+                    cmd.Parameters.AddWithValue("@goalObjectives", goal.GoalObjectives);
                     cmd.Parameters.AddWithValue("@notes", goal.Notes);
                     cmd.Parameters.AddWithValue("@goalDate", goal.goalDate);
                     cmd.Parameters.AddWithValue("@id", goal.Id);
