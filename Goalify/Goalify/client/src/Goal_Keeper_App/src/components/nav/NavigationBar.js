@@ -12,6 +12,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { getTips, GoalTips } from "../ApiManager";
 import { Link, useHistory } from "react-router-dom";
 import OpenAIChatbot from "../OpenAIChatBot/OpenAIChatBot";
+import "./NavBar.css";
 
 export const NavigationBar = () => {
   const [suggestions, setSuggestions] = useState([]);
@@ -41,12 +42,16 @@ export const NavigationBar = () => {
                 <Nav.Link href="/mygoals">My Goals</Nav.Link>
                 <Nav.Link href="/review">Year In Review</Nav.Link>
                 <NavDropdown
-                  title="Goalsetting Tips"
+                  title="Goal-Setting Tips"
                   id="collasible-nav-dropdown"
                 >
                   {suggestions.map((data) => {
                     return (
-                      <NavDropdown.Item key={data.id} href={`/tips/${data.id}`}>
+                      <NavDropdown.Item
+                        key={data.id}
+                        href={`/tips/${data.id}`}
+                        // style={{ color: "black", backgroundColor: "white" }}
+                      >
                         {data.suggestion}
                       </NavDropdown.Item>
                     );
