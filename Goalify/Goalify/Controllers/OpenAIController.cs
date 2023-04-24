@@ -15,7 +15,7 @@ namespace Goalify.Controllers
         [Route("getresult")]
         public IActionResult GetResult([FromBody]string prompt)
         {
-            string apikey = "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";
+            string apikey = "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";
             string answer = string.Empty;
             var openai = new OpenAIAPI(apikey);
             CompletionRequest completion = new CompletionRequest();

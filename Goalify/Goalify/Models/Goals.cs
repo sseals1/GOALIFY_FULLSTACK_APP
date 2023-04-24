@@ -21,6 +21,7 @@ namespace Goalify.Models
         //public int MilestoneId { get; set; }
         public string GoalDescription { get; set; }
         public string GoalObjectives    { get; set; }
+        public string GoalNotes { get; set; }
         public string Notes { get; set; }
         public DateTime goalDate { get; set; }
 

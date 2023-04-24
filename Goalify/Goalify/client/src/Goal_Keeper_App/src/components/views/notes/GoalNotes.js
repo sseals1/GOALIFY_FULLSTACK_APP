@@ -22,7 +22,7 @@ export const GoalNotes = () => {
     // const goal = goals.find((goal) => goal.id === goalsId);
     const noteObj = {
       ...goals,
-      notes: goalNotes,
+      goalNotes: goalNotes,
     };
     console.log(goals);
 

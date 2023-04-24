@@ -231,8 +231,8 @@ export const GoalList = () => {
                           <div className="goal_props">
                             <div>Goal description: {goal.goalDescription}</div>
                             <div>Goal objectives: {goal.goalObjective}</div>
-                            <div>Notes: {goal.goalNotes}</div>
-                            <div>Note updates: {goal.notes}</div>
+                            <div>Notes: {goal.notes}</div>
+                            <div>Note updates: {goal.goalNotes}</div>
                             <div>
                               Completion Date: {unixTime(goal.goalDate)}
                             </div>
