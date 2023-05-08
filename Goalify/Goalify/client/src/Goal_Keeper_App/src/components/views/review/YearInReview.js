@@ -37,7 +37,7 @@ export const YearInReview = () => {
   }, []);
 
   const deleteGoal = (id) => {
-    fetch(`http://localhost:8088/goals/${id}`, {
+    fetch(`http://api/goals/${id}`, {
       method: "DELETE",
     })
       .then(() => {
@@ -50,7 +50,7 @@ export const YearInReview = () => {
   };
 
   const deleteMilestone = (id) => {
-    fetch(`http://localhost:8088/milestones/${id}`, {
+    fetch(`http://api/milestones/${id}`, {
       method: "DELETE",
     });
   };

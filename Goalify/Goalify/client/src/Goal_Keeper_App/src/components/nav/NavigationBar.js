@@ -50,7 +50,7 @@ export const NavigationBar = () => {
                       <NavDropdown.Item
                         key={data.id}
                         href={`/tips/${data.id}`}
-                        // style={{ color: "black", backgroundColor: "white" }}
+                        //style={{ color: "black", backgroundColor: "white" }}
                       >
                         {data.suggestion}
                       </NavDropdown.Item>
