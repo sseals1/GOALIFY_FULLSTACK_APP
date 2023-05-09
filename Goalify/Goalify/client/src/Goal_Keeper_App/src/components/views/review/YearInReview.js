@@ -79,7 +79,7 @@ export const YearInReview = () => {
 
           return (
             <>
-              <div className="goal_list" key={goalObj.id}>
+              <div className="goal_list" key={goalObj.id} goalObj={goalObj.id}>
                 <Container>
                   <Row>
                     <Col md={12}>
