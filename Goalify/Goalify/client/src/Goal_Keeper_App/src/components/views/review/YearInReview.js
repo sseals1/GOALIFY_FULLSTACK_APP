@@ -1,16 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { getMilestones, ListOfGoals } from "../../ApiManager";
+import {
+  getMilestones,
+  GoalCategory,
+  GoalPriority,
+  ListOfGoals,
+  TimeFrame,
+} from "../../ApiManager";
 import { Container, Row, Col } from "react-bootstrap";
 import "./YearInReview.css";
 
 export const YearInReview = () => {
-  const [goals, setGoalList] = useState([]);
-  const [milestones, setMilestone] = useState([]);
+  const [goals, setGoals] = useState([]);
+  const [milestones, setMilestones] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [priorities, setPriorities] = useState([]);
+  const [terms, setTerms] = useState([]);
 
   const getFilteredGoals = () => {
     ListOfGoals().then((data) => {
-      setGoalList(
+      setGoals(
         data.filter((item) => {
           return item.userId === parseInt(localStorage.getItem("goal_keeper"));
         })
@@ -24,11 +32,10 @@ export const YearInReview = () => {
 
   const getFilteredMilestones = () => {
     getMilestones().then((data) => {
-      setMilestone(
-        data.filter((item) => {
-          return item.goalId === item.goal?.id;
-        })
-      );
+      const filteredMilestones = data.filter((item) => {
+        return item.id === goals.milestoneId;
+      });
+      setMilestones(filteredMilestones);
     });
   };
 
@@ -36,21 +43,47 @@ export const YearInReview = () => {
     getFilteredMilestones();
   }, []);
 
+  const getPriorities = () => {
+    GoalPriority().then((data) => {
+      return setPriorities(data);
+    });
+  };
+
+  useEffect(() => {
+    getPriorities();
+  }, []);
+
+  const getCategories = () => {
+    GoalCategory().then((data) => {
+      return setCategories(data);
+    });
+  };
+
+  useEffect(() => {
+    getCategories();
+  }, []);
+
+  const getTerms = () => {
+    TimeFrame().then((data) => {
+      return setTerms(data);
+    });
+  };
+
+  useEffect(() => {
+    getTerms();
+  }, []);
+
   const deleteGoal = (id) => {
-    fetch(`http://api/goals/${id}`, {
+    fetch(`/api/goals/${id}`, {
       method: "DELETE",
-    })
-      .then(() => {
-        deleteMilestone(id);
-      })
-      // deleteMilestone called inside of the deleteGoal Delete fetch call to delete the ascociated milestone from the milstones array in the db.
-      .then(() => {
-        getFilteredGoals();
-      });
+    }).then(() => {
+      deleteMilestone(id);
+      getFilteredGoals();
+    });
   };
 
   const deleteMilestone = (id) => {
-    fetch(`http://api/milestones/${id}`, {
+    fetch(`api/milestones/${id}`, {
       method: "DELETE",
     });
   };
@@ -79,7 +112,7 @@ export const YearInReview = () => {
 
           return (
             <>
-              <div className="goal_list" key={goalObj.id} goalObj={goalObj.id}>
+              <div className="goal_list" key={goalObj.id} goalobj={goalObj}>
                 <Container>
                   <Row>
                     <Col md={12}>
@@ -109,9 +142,13 @@ export const YearInReview = () => {
                       Goal Category:
                       <button
                         className="drop-btn-2"
-                        style={{ background: `${goalObj.category?.color}` }}
+                        //style={{ background: `${categories}` }}
                       >
-                        {goalObj.category?.category}
+                        {categories.map((data) => {
+                          if (goalObj.categoryId === data.id) {
+                            return <div>{data.category}</div>;
+                          }
+                        })}
                       </button>
                       Goal Priority:
                       <button
@@ -119,7 +156,10 @@ export const YearInReview = () => {
                         className="drop-btn-2"
                         style={{ background: `${goalObj.priority?.color}` }}
                       >
-                        {goalObj.priority?.priority}
+                        {priorities.map((data) => {
+                          if (goalObj.priorityId === data.id)
+                            return <div>{data.priority}</div>;
+                        })}
                       </button>
                       Goal Term:
                       <button
@@ -127,7 +167,10 @@ export const YearInReview = () => {
                         className="drop-btn-2"
                         style={{ background: `${goalObj.term?.color}` }}
                       >
-                        {goalObj.term?.term}
+                        {terms.map((data) => {
+                          if (goalObj.termId === data.id)
+                            return <div>{data.term}</div>;
+                        })}
                       </button>
                     </Col>
                     {/* </Col> */}
