@@ -2,6 +2,9 @@
 using Goalify.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System;
 
 namespace Goalify.Controllers
 {
@@ -21,6 +24,8 @@ namespace Goalify.Controllers
         {
             return Ok(_goalsRepository.GetAll());
         }
+
+
 
         // https://localhost:5001/api/goals/5
         [HttpGet("{id}")]
