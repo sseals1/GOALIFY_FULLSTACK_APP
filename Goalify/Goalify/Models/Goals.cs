@@ -23,7 +23,7 @@ namespace Goalify.Models
         public string GoalObjectives    { get; set; }
         public string GoalNotes { get; set; }
         public string Notes { get; set; }
-        public DateTime goalDate { get; set; }
+        public DateTime GoalDate { get; set; }
 
     }
     

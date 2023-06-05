@@ -151,10 +151,10 @@ export const GoalList = () => {
 
   useEffect(() => {
     ListOfGoals().then((data) => {
+      console.log(data);
       setGoalList(
         data.filter((item) => {
           return item.userId === parseInt(localStorage.getItem("goal_keeper"));
-          console.log(item);
         })
       );
     });
@@ -232,7 +232,7 @@ export const GoalList = () => {
                             <div>Goal description: {goal.goalDescription}</div>
                             <div>Goal objectives: {goal.goalObjectives}</div>
                             <div>Notes: {goal.notes}</div>
-                            {console.log(goal)}
+                            {/* {console.log(goal)} */}
                             <div>Note updates: {goal.goalNotes}</div>
                             <div>
                               Completion Date: {unixTime(goal.goalDate)}

@@ -29,7 +29,7 @@ namespace Goalify.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT id, userId, categoryId, priorityId, termId, milestoneId, goalDescription, goalObjectives, notes, goalDate
+                    cmd.CommandText = @"SELECT id, userId, categoryId, priorityId, termId, milestoneId, goalDescription, goalObjectives, notes, goalNotes, goalDate
                         FROM Goals";
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -47,7 +47,8 @@ namespace Goalify.Repositories
                                 GoalDescription = reader.GetString(reader.GetOrdinal("GoalDescription")),
                                 GoalObjectives = reader.GetString(reader.GetOrdinal("GoalObjectives")),
                                 Notes = reader.GetString(reader.GetOrdinal("Notes")),
-                                goalDate = reader.GetDateTime(reader.GetOrdinal("goalDate"))
+                                GoalDate = reader.GetDateTime(reader.GetOrdinal("GoalDate")),
+                                GoalNotes = DbUtils.GetString(reader, "GoalNotes")
                             };
                             if (!reader.IsDBNull(reader.GetOrdinal("Notes")))
                             {
@@ -91,8 +92,8 @@ namespace Goalify.Repositories
                                 GoalDescription = DbUtils.GetString(reader, "GoalDescription"),
                                 GoalObjectives = reader.GetString(reader.GetOrdinal("GoalObjectives")),
                                 Notes = reader.GetString(reader.GetOrdinal("Notes")),  
-                                goalDate = reader.GetDateTime(reader.GetOrdinal("goalDate")),
-                                GoalNotes = DbUtils.GetString(reader, "goalNotes"),
+                                GoalDate = reader.GetDateTime(reader.GetOrdinal("GoalDate")),
+                                GoalNotes = reader.GetString(reader.GetOrdinal("GoalNotes")),
                             };
                             //if (!reader.IsDBNull(reader.GetOrdinal("Notes")))
                             //{
