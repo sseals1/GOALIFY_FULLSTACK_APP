@@ -230,8 +230,9 @@ export const GoalList = () => {
                         <Link onClick={saveMilestone} to={`/goals/${goal.id}`}>
                           <div className="goal_props">
                             <div>Goal description: {goal.goalDescription}</div>
-                            <div>Goal objectives: {goal.goalObjective}</div>
+                            <div>Goal objectives: {goal.goalObjectives}</div>
                             <div>Notes: {goal.notes}</div>
+                            {console.log(goal)}
                             <div>Note updates: {goal.goalNotes}</div>
                             <div>
                               Completion Date: {unixTime(goal.goalDate)}

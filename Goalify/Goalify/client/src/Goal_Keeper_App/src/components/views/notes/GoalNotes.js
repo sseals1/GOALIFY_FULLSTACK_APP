@@ -43,6 +43,9 @@ export const GoalNotes = () => {
       <Container className="container">
         <form className="goalForm">
           <h4 className="goalForm__title">Edit Goal Notes</h4>
+          {/* <button className="update-btn" onClick={history.push("/mygoals")}>
+            back
+          </button> */}
           <fieldset>
             <div className="form-group">
               <label htmlFor="note_description">Update notes:</label>
