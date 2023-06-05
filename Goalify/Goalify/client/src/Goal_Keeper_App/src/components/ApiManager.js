@@ -47,7 +47,6 @@ export const Review = () => {
 };
 
 export const GetGoal = (id) => {
-  // console.log(id);
   return fetch(`/api/goals/${id}`).then((res) => res.json());
 };
 
