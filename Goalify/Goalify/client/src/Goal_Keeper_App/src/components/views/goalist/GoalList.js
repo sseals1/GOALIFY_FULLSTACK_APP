@@ -151,7 +151,6 @@ export const GoalList = () => {
 
   useEffect(() => {
     ListOfGoals().then((data) => {
-      console.log(data);
       setGoalList(
         data.filter((item) => {
           return item.userId === parseInt(localStorage.getItem("goal_keeper"));
