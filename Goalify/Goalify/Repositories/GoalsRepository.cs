@@ -95,12 +95,12 @@ namespace Goalify.Repositories
                                 CategoryId = DbUtils.GetInt(reader, "CategoryId"),
                                 PriorityId = reader.GetInt32(reader.GetOrdinal("PriorityId")),
                                 TermId = reader.GetInt32(reader.GetOrdinal("TermId")),
-                                //MilestoneId = reader.GetInt32(reader.GetOrdinal("Id")),
+                                MilestoneId = reader.GetInt32(reader.GetOrdinal("Id")),
                                 GoalDescription = DbUtils.GetString(reader, "GoalDescription"),
                                 GoalObjectives = reader.GetString(reader.GetOrdinal("GoalObjectives")),
-                                Notes = reader.GetString(reader.GetOrdinal("Notes")),  
+                                Notes = DbUtils.GetString(reader, "Notes"),  
                                 GoalDate = reader.GetDateTime(reader.GetOrdinal("GoalDate")),
-                                GoalNotes = reader.GetString(reader.GetOrdinal("GoalNotes")),
+                                GoalNotes = DbUtils.GetString(reader, "GoalNotes"),
                             };
                             //if (!reader.IsDBNull(reader.GetOrdinal("Notes")))
                             //{

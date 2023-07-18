@@ -5,7 +5,7 @@ namespace Goalify.Models
     public class Milestones
     {
         public int Id { get; set; }
-        public int GoalId { get; set; }
+        //public int GoalId { get; set; }
         public string ProgressNotes { get; set; }
         public string DirectionNotes { get; set; }
         public string DefinedNotes { get; set; }

@@ -14,26 +14,54 @@ export const GoalForm = () => {
   const [goalDate, setGoalDate] = useState([]);
   const [newGoal, setGoals] = useState({});
   // const [milestoneId, setMilestoneId] = useState([]);
-
   const [categoryId, setGoalCategory] = useState([]);
   //   goalCategory is the key on the new object that is being created coming from the event.target.value
   const [category, setCategory] = useState([]);
   //   setCategory is setting state for the useEffect (bringing in categories)
   // category is table in the the db
-
   const [priorityId, setGoalPriority] = useState([]);
   const [priority, setPriority] = useState([]);
 
   const [termId, setGoalTimeFrame] = useState([]);
   const [timeFrame, setTimeFrame] = useState([]);
-
   // const [notes, setNotes] = useState("");
+
+  const [milestoneId, setMilestone] = useState({});
 
   const submitGoal = (captureEventToPreventDefaultBehavior) => {
     // This parameter "captureEventToPreventDefault" stops the default behavior of the
     // browser which in this case is to Submit the goal. By preventing the default browser behavior
     // the browser will display the other html.
     captureEventToPreventDefaultBehavior.preventDefault();
+
+    const milestoneIdObj = {
+      progressNotes: null,
+      directionNotes: null,
+      definedNotes: null,
+      featuresNotes: null,
+      attainedNotes: null,
+      direction: null,
+      defined: null,
+      progress: null,
+      features: null,
+      attained: null,
+    };
+
+    setMilestone(milestoneIdObj);
+
+    const fetchMilestoneObj = {
+      // POST fetch call to send the new object to the API
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(milestoneIdObj),
+      // the body of the fetch object has to be converted to JSON string
+    };
+    // return (
+    //   fetch("https://localhost:5001/api/milestones", fetchMilestoneObj)
+    //     // the fetchOption object is being sent to the url in the return fetch
+    //     )
 
     const goalObj = {
       // the goal object being updated with values from the state variable "goal"
@@ -61,17 +89,14 @@ export const GoalForm = () => {
       // the body of the fetch object has to be converted to JSON string
     };
     // console.log(goalObj);
-    return (
-      fetch("https://localhost:5001/api/goals", fetchOption)
-        // the fetchOption object is being sent to the url in the return fetch
-        .then(() => {
-          history.push("/mygoals");
-
-          // Once the object is sent to the API, the user is then
-          // pushed/routed back to the /goals route that is
-          // specified as goalList in the ApplicationViews component
-        })
-    );
+    return fetch(
+      "https://localhost:5001/api/milestones",
+      fetchMilestoneObj
+    ).then(() => {
+      fetch("https://localhost:5001/api/goals", fetchOption).then(() => {
+        history.push("/mygoals");
+      });
+    });
   };
 
   // const formChecker = (newGoalObj) => {
