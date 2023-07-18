@@ -248,7 +248,7 @@ export const GoalList = () => {
                         </Button>
                         <Button
                           className="drop-btn"
-                          style={{ background: `${goal.category?.color}` }}
+                          style={{ background: `${goal.categoryid?.color}` }}
                           disabled
                         >
                           {goal.category?.category}
