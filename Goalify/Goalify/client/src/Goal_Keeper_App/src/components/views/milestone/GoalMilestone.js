@@ -1,4 +1,4 @@
- import { getSpaceUntilMaxLength } from "@testing-library/user-event/dist/utils";
+import { getSpaceUntilMaxLength } from "@testing-library/user-event/dist/utils";
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { useParams, useHistory } from "react-router-dom";
@@ -9,12 +9,12 @@ export const GoalMilestone = () => {
   const history = useHistory();
   const { goalsId } = useParams();
   const [goal, setGoal] = useState("");
-  const [direction, setDirection] = useState({});
-  const [defined, setDefined] = useState({});
-  const [progress, setProgress] = useState({});
-  const [features, setFeatures] = useState({});
-  const [attained, setAttained] = useState({});
-  const [notes, setNotes] = useState({});
+  const [direction, setDirection] = useState([]);
+  const [defined, setDefined] = useState([]);
+  const [progress, setProgress] = useState([]);
+  const [features, setFeatures] = useState([]);
+  const [attained, setAttained] = useState([]);
+  const [notes, setNotes] = useState([]);
   const [milestone, setMilestone] = useState([]);
 
   const milestoneChecker = milestone.find((mileObj) => {
@@ -24,10 +24,7 @@ export const GoalMilestone = () => {
     );
   });
 
-
-
   const saveMilestone = () => {
-    
     const newMilestoneObject = {
       direction: direction,
       defined: defined,
@@ -38,17 +35,17 @@ export const GoalMilestone = () => {
       userId: parseInt(localStorage.getItem("goal_keeper")),
       goalId: goal.id,
     };
+    console.log(newMilestoneObject);
 
     if (milestoneChecker) {
-      fetch(`http://localhost:8088/milestones/${milestoneChecker.id}`, {
+      fetch(`http://localhost:5001/api/milestones/${milestoneChecker.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(newMilestoneObject),
-      })
-      .then(() => {
-      history.push("/mygoals");
+      }).then(() => {
+        history.push("/mygoals");
       });
     } else {
       const fetchObject = {
@@ -58,11 +55,13 @@ export const GoalMilestone = () => {
         },
         body: JSON.stringify(newMilestoneObject),
       };
-      return fetch(`http://localhost:8088/milestones`, fetchObject).then(() => {
-        history.push("/mygoals");
-      });
-    
-  };}
+      return fetch(`https://localhost:5001/api/milestones`, fetchObject).then(
+        () => {
+          history.push("/mygoals");
+        }
+      );
+    }
+  };
 
   useEffect(() => {
     GetGoal(parseInt(goalsId)).then((data) => {
@@ -71,26 +70,21 @@ export const GoalMilestone = () => {
   }, []);
 
   useEffect(() => {
-    getMilestones()
-    .then((data) => {
+    getMilestones().then((data) => {
       setMilestone(data);
     });
   }, []);
 
-
   useEffect(() => {
-      if (milestoneChecker) {
-        setDirection(milestoneChecker.direction)
-        setDefined(milestoneChecker.defined)
-        setProgress(milestoneChecker.progress)
-        setFeatures(milestoneChecker.features)
-        setAttained(milestoneChecker.attained)
-        setNotes(milestoneChecker.notes)
-      }
-  
-  },[milestone])
-
-
+    if (milestoneChecker) {
+      setDirection(milestoneChecker.direction);
+      setDefined(milestoneChecker.defined);
+      setProgress(milestoneChecker.progress);
+      setFeatures(milestoneChecker.features);
+      setAttained(milestoneChecker.attained);
+      setNotes(milestoneChecker.notes);
+    }
+  }, [milestone]);
 
   return (
     <>
@@ -224,15 +218,15 @@ export const GoalMilestone = () => {
               </Row>
               <Row>
                 <Col>
-              <textarea
-                value={notes}
-                className="textarea"
-                placeholder="Enter milestone notes here..."
-                onChange={(event) => {
-                  setNotes(event.target.value);
-                }}
-              ></textarea>
-               </Col>
+                  <textarea
+                    value={notes}
+                    className="textarea"
+                    placeholder="Enter milestone notes here..."
+                    onChange={(event) => {
+                      setNotes(event.target.value);
+                    }}
+                  ></textarea>
+                </Col>
               </Row>
             </div>
           </fieldset>

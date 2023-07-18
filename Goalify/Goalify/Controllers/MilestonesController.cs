@@ -59,7 +59,7 @@ namespace Goalify.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            _milestonesRepository.Delete(id);
+             _milestonesRepository.Delete(id);
             return NoContent();
         }
     }

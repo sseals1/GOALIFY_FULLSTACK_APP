@@ -27,7 +27,7 @@ namespace Goalify.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT id, goalId, progressNotes, directionNotes, definedNotes, featuresNotes, attainedNotes, direction, defined, progress, features, attained
+                        SELECT id, progressNotes, directionNotes, definedNotes, featuresNotes, attainedNotes, direction, defined, progress, features, attained
                           FROM Milestones
                          ";
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -38,7 +38,7 @@ namespace Goalify.Repositories
                             var milestone = new Milestones()
                             {
                                 Id = DbUtils.GetInt(reader, "Id"),
-                                GoalId= DbUtils.GetInt(reader, "GoalId"),
+                                //GoalId= DbUtils.GetInt(reader, "GoalId"),
                                 ProgressNotes = DbUtils.GetString(reader, "ProgressNotes"),
                                 DirectionNotes = DbUtils.GetString(reader, "DirectionNotes"),
                                 DefinedNotes = DbUtils.GetString(reader, "DefinedNotes"),
@@ -71,7 +71,7 @@ namespace Goalify.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT id, goalId, progressNotes, directionNotes, definedNotes, featuresNotes, attainedNotes, direction, defined, progress, features, attained
+                        SELECT id, progressNotes, directionNotes, definedNotes, featuresNotes, attainedNotes, direction, defined, progress, features, attained
                           FROM Milestones
                          WHERE Id = @id;";
                     cmd.Parameters.AddWithValue("@id", id);
@@ -84,7 +84,7 @@ namespace Goalify.Repositories
                             milestone = new Milestones()
                             {
                                 Id = DbUtils.GetInt(reader, "Id"),
-                                GoalId = DbUtils.GetInt(reader, "GoalId"),
+                                //GoalId = DbUtils.GetInt(reader, "GoalId"),
                                 ProgressNotes = DbUtils.GetString(reader, "ProgressNotes"),
                                 DirectionNotes = DbUtils.GetString(reader, "DirectionNotes"),
                                 DefinedNotes = DbUtils.GetString(reader, "DefinedNotes"),
@@ -117,10 +117,10 @@ namespace Goalify.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        INSERT INTO milestones (goalId, progressNotes, directionNotes, definedNotes, featuresNotes, attainedNotes, direction, defined, progress, features, attained)
+                        INSERT INTO milestones (progressNotes, directionNotes, definedNotes, featuresNotes, attainedNotes, direction, defined, progress, features, attained)
                         OUTPUT INSERTED.ID
-                        VALUES (@goalId, @progressNotes, @directionNotes, @definedNotes, @featuresNotes, @attainedNotes, @direction, @defined, @progress, @features, @attained)";
-                    cmd.Parameters.AddWithValue("@goalId", milestone.GoalId);
+                        VALUES (@progressNotes, @directionNotes, @definedNotes, @featuresNotes, @attainedNotes, @direction, @defined, @progress, @features, @attained)";
+                    //cmd.Parameters.AddWithValue("@goalId", milestone.GoalId);
                     cmd.Parameters.AddWithValue("@progressNotes", milestone.ProgressNotes);
                     cmd.Parameters.AddWithValue("@directionNotes", milestone.DirectionNotes);
                     cmd.Parameters.AddWithValue("@definedNotes", milestone.DefinedNotes);
@@ -165,9 +165,9 @@ namespace Goalify.Repositories
                        progress = @progress, 
                        features = @features,
                        attained = @attained,
-                       goalId = @goalid
+        
                  WHERE goalId = @goalid";
-                    cmd.Parameters.AddWithValue("@goalId", milestone.GoalId);
+                    //cmd.Parameters.AddWithValue("@goalId", milestone.GoalId);
                     cmd.Parameters.AddWithValue("@progressNotes", milestone.ProgressNotes);
                     cmd.Parameters.AddWithValue("@directionNotes", milestone.DirectionNotes);
                     cmd.Parameters.AddWithValue("@definedNotes", milestone.DefinedNotes);
