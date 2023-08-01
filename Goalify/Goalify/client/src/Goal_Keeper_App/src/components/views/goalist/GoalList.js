@@ -265,7 +265,6 @@
 //     </>
 //   );
 // };
-
 import React, { useState, useEffect } from "react";
 import { getMilestones, ListOfGoals } from "../../ApiManager";
 import "./GoalList.css";
@@ -326,6 +325,7 @@ export const GoalList = () => {
               onClick={() => {
                 history.push("/goalform");
               }}
+              style={{ backgroundColor: "blue", color: "white" }} // Change the color to your desired color
             >
               Create a goal
             </Button>
@@ -335,15 +335,17 @@ export const GoalList = () => {
               onClick={() => {
                 history.push("/filterbyweek");
               }}
+              style={{ backgroundColor: "green", color: "white" }} // Change the color to your desired color
             >
               This week's goals
             </Button>
 
             <Button
-              className="create_goal-btn btn btn-success"
+              className="create_goal-btn btn btn-warning"
               onClick={() => {
                 history.push("/filterbymonth");
               }}
+              style={{ backgroundColor: "orange", color: "white" }} // Change the color to your desired color
             >
               This month's goals
             </Button>
