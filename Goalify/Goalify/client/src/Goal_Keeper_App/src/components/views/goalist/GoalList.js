@@ -370,14 +370,24 @@ export const GoalList = () => {
                         </Link>
                         <div className="edit-btn-container">
                           <Button
-                            className="edit_goal-btn btn btn-secondary"
+                            className="edit_goal-btn btn btn-secondary custom-margin" // Add the custom-margin class
                             onClick={() => {
                               history.push(`/goalnotes/${goal.id}`);
                             }}
                           >
                             EDIT
                           </Button>
+
+                          <Button
+                            className="edit_goal-btn btn btn-danger" // Keep class as "btn-danger" for red color
+                            onClick={() => {
+                              history.push(`/mygoals`);
+                            }}
+                          >
+                            DELETE
+                          </Button>
                         </div>
+
                         {/* <Button
                           className="drop-btn"
                           style={
