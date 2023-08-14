@@ -314,6 +314,21 @@ export const GoalList = () => {
     }
   };
 
+  // const deleteMilestone = (id) => {
+  //   fetch(`api/milestones/${id}`, {
+  //     method: "DELETE",
+  //   });
+  // };
+
+  const deleteGoal = (id) => {
+    console.log("Deleting goal with id:", id);
+    fetch(`/api/goals/${id}`, {
+      method: "DELETE",
+    }).then(() => {
+      history.push("/mygoals");
+    });
+  };
+
   return (
     <>
       <div className="container">
@@ -381,7 +396,7 @@ export const GoalList = () => {
                           <Button
                             className="edit_goal-btn btn btn-danger" // Keep class as "btn-danger" for red color
                             onClick={() => {
-                              history.push(`/mygoals`);
+                              deleteGoal(goal.id);
                             }}
                           >
                             DELETE
