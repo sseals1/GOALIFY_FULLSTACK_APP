@@ -61,7 +61,7 @@ export const GoalForm = () => {
     // return (
     //   fetch("https://localhost:5001/api/milestones", fetchMilestoneObj)
     //     // the fetchOption object is being sent to the url in the return fetch
-    //     )
+    //       )};
 
     const goalObj = {
       // the goal object being updated with values from the state variable "goal"
@@ -88,12 +88,15 @@ export const GoalForm = () => {
       body: JSON.stringify(goalObj),
       // the body of the fetch object has to be converted to JSON string
     };
-    // console.log(goalObj);
+
+    console.log("fetchMilestoneObj:", fetchMilestoneObj);
+    console.log("milestoneIdObj:", milestoneIdObj);
+
     return fetch(
-      "https://localhost:5001/api/milestones",
+      "https://localhost:5001/api/Milestones",
       fetchMilestoneObj
     ).then(() => {
-      fetch("https://localhost:5001/api/goals", fetchOption).then(() => {
+      fetch("https://localhost:5001/api/Goals", fetchOption).then(() => {
         history.push("/mygoals");
       });
     });

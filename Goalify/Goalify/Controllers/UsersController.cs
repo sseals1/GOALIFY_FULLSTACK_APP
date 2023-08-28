@@ -34,24 +34,24 @@ namespace Goalify.Controllers
             return Ok(user);
         }
 
-        // https://localhost:5001/api/user/
+        // https://localhost:5001/api/users/
         [HttpPost]
-        public IActionResult Post(Users goal)
+        public IActionResult Post(Users user)
         {
-            _usersRepository.Add(goal);
-            return CreatedAtAction("Get", new { id = goal.Id }, goal);
+            _usersRepository.Add(user);
+            return CreatedAtAction("Get", new { id = user.Id }, user);
         }
 
         // https://localhost:5001/api/user/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, Users goal)
+        public IActionResult Put(int id, Users user)
         {
-            if (id != goal.Id)
+            if (id != user.Id)
             {
                 return BadRequest();
             }
 
-            _usersRepository.Update(goal);
+            _usersRepository.Update(user);
             return NoContent();
         }
 

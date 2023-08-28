@@ -279,8 +279,10 @@ export const GoalList = () => {
 
   useEffect(() => {
     ListOfGoals().then((data) => {
+      console.log(data);
       setGoalList(
         data.filter((item) => {
+          console.log(item.userId);
           return item.userId === parseInt(localStorage.getItem("goal_keeper"));
         })
       );
@@ -289,6 +291,7 @@ export const GoalList = () => {
 
   useEffect(() => {
     getMilestones().then((data) => {
+      console.log(data);
       setMilestone(data);
     });
   }, []);
@@ -312,6 +315,21 @@ export const GoalList = () => {
     if (milestoneChecker) {
       history.push("/milefilled");
     }
+  };
+
+  // const deleteMilestone = (id) => {
+  //   fetch(`api/milestones/${id}`, {
+  //     method: "DELETE",
+  //   });
+  // };
+
+  const deleteGoal = (id) => {
+    console.log("Deleting goal with id:", id);
+    fetch(`/api/goals/${id}`, {
+      method: "DELETE",
+    }).then(() => {
+      history.push("/mygoals");
+    });
   };
 
   return (
@@ -352,6 +370,7 @@ export const GoalList = () => {
           </div>
           {goallist
             .map((goal) => {
+              console.log(goal.id);
               return (
                 <div key={goal.id} className="goal_list">
                   <Container>
@@ -381,7 +400,7 @@ export const GoalList = () => {
                           <Button
                             className="edit_goal-btn btn btn-danger" // Keep class as "btn-danger" for red color
                             onClick={() => {
-                              history.push(`/mygoals`);
+                              deleteGoal(goal.id);
                             }}
                           >
                             DELETE

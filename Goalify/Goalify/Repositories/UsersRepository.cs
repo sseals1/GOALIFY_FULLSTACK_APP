@@ -88,37 +88,34 @@ namespace Goalify.Repositories
 
             public void Add(Users user)
             {
-        //        using (var conn = Connection)
-        //        {
-        //            conn.Open();
-        //            using (var cmd = conn.CreateCommand())
-        //            {
-        //                cmd.CommandText = @"
-        //                    INSERT INTO Goal (userId,categoryId, priorityId, termId, milestoneId, goalDescription, goalObjectives, notes, date)
-        //                    OUTPUT INSERTED.ID
-        //                    VALUES (@userId, @categoryId, @priorityId, @termId, @milestoneId, @goalDescription, @notes, @date)";
-        //                cmd.Parameters.AddWithValue("@userId", goal.UserId);
-        //                cmd.Parameters.AddWithValue("@categoryId", goal.CategoryId);
-        //                cmd.Parameters.AddWithValue("@priorityId", goal.PriorityId);
-        //                cmd.Parameters.AddWithValue("@termId", goal.TermId);
-        //                cmd.Parameters.AddWithValue("@milestoneId", goal.MilestoneId);
-        //                cmd.Parameters.AddWithValue("@goalDescription", goal.GoalDescription);
-        //                cmd.Parameters.AddWithValue("@notes", goal.Notes);
-        //                cmd.Parameters.AddWithValue("@date", goal.Date);
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                            INSERT INTO Users (name, address, email)
+                            OUTPUT INSERTED.ID
+                            VALUES (@name, @address, @email)";
+                    //cmd.Parameters.AddWithValue("@userId", user.Id);
+                    cmd.Parameters.AddWithValue("@name", user.Name);
+                    cmd.Parameters.AddWithValue("@address", user.Address);
+                    cmd.Parameters.AddWithValue("@email", user.Email);
+                   
 
-        //                //if (variety.Notes == null)
-        //                //    {
-        //                //        cmd.Parameters.AddWithValue("@notes", DBNull.Value);
-        //                //    }
-        //                //    else
-        //                //    {
-        //                //        cmd.Parameters.AddWithValue("@notes", variety.Notes);
-        //                //    }
+                    //if (variety.Notes == null)
+                    //    {
+                    //        cmd.Parameters.AddWithValue("@notes", DBNull.Value);
+                    //    }
+                    //    else
+                    //    {
+                    //        cmd.Parameters.AddWithValue("@notes", variety.Notes);
+                    //    }
 
-        //                goal.Id = (int)cmd.ExecuteScalar();
-        //            }
-        //        }
+                    user.Id = (int)cmd.ExecuteScalar();
+                }
             }
+        }
 
         public void Update(Users user)
         {
