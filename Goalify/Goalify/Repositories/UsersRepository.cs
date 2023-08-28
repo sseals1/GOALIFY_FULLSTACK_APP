@@ -101,16 +101,7 @@ namespace Goalify.Repositories
                     cmd.Parameters.AddWithValue("@name", user.Name);
                     cmd.Parameters.AddWithValue("@address", user.Address);
                     cmd.Parameters.AddWithValue("@email", user.Email);
-                   
-
-                    //if (variety.Notes == null)
-                    //    {
-                    //        cmd.Parameters.AddWithValue("@notes", DBNull.Value);
-                    //    }
-                    //    else
-                    //    {
-                    //        cmd.Parameters.AddWithValue("@notes", variety.Notes);
-                    //    }
+                  
 
                     user.Id = (int)cmd.ExecuteScalar();
                 }
