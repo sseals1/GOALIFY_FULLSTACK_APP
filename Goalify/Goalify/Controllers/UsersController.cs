@@ -22,7 +22,7 @@ namespace Goalify.Controllers
             return Ok(_usersRepository.GetAll());
         }
 
-        // https://localhost:5001/api/user/
+        // https://localhost:5001/api/users/email/
         [HttpGet("{email}")]
         public IActionResult Get(Users email)
         {
