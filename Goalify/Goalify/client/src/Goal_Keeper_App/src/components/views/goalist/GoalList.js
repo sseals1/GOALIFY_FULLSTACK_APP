@@ -275,14 +275,14 @@ export const GoalList = () => {
   const history = useHistory();
   const [goallist, setGoalList] = useState([]);
   const { goalsId } = useParams();
+  console.log(goalsId);
   const [milestone, setMilestone] = useState({});
 
   useEffect(() => {
     ListOfGoals().then((data) => {
-      console.log(data);
       setGoalList(
         data.filter((item) => {
-          console.log(item.userId);
+          console.log(item);
           return item.userId === parseInt(localStorage.getItem("goal_keeper"));
         })
       );
@@ -291,7 +291,6 @@ export const GoalList = () => {
 
   useEffect(() => {
     getMilestones().then((data) => {
-      console.log(data);
       setMilestone(data);
     });
   }, []);
@@ -370,7 +369,6 @@ export const GoalList = () => {
           </div>
           {goallist
             .map((goal) => {
-              console.log(goal.id);
               return (
                 <div key={goal.id} className="goal_list">
                   <Container>
