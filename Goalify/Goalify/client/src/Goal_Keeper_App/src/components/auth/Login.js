@@ -86,16 +86,22 @@ export const Login = () => {
   const history = useHistory();
 
   const existingUserCheck = () => {
+    console.log("Checking for user with email:", email); // to check the value of email
     return fetch(`/api/users?email=${email}`)
       .then((res) => res.json())
-      .then((user) => (user.length ? user[0] : false));
+      .then((user) => {
+        console.log("User found:", user); // log the user data
+        return user.length ? user[0] : false;
+      });
   };
 
   const handleLogin = (e) => {
     e.preventDefault();
     existingUserCheck().then((exists) => {
       if (exists) {
+        console.log(exists);
         localStorage.setItem("goal_keeper", exists.id);
+        console.log("Setting goal_keeper:", exists.id);
         history.push("/goalform");
       } else {
         existDialog.current.showModal();
