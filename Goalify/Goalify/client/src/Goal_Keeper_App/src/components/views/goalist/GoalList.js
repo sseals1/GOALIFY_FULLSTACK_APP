@@ -282,7 +282,8 @@ export const GoalList = () => {
     ListOfGoals().then((data) => {
       setGoalList(
         data.filter((item) => {
-          console.log(item);
+          // console.log(item);
+          // console.log(localStorage.getItem("goal_keeper"));
           return item.userId === parseInt(localStorage.getItem("goal_keeper"));
         })
       );

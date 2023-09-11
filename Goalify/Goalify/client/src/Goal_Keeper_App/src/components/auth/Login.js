@@ -85,9 +85,35 @@ export const Login = () => {
   const existDialog = useRef();
   const history = useHistory();
 
+  // const existingUserCheck = () => {
+  //   console.log("Checking for user with email:", email); // to check the value of email
+  //   // const email = "hardcoded-email@example.com";
+  //   return fetch(`/api/users?email=${email}`)
+  //     .then((res) => res.json())
+  //     .then((user) => {
+  //       console.log("User found:", user); // log the user data
+  //       return user.length ? user[0] : false;
+  //     });
+  // };
+
   const existingUserCheck = () => {
     console.log("Checking for user with email:", email); // to check the value of email
-    return fetch(`/api/users?email=${email}`)
+
+    // Create an object with the email
+    const requestData = {
+      email: email, // Replace with your email variable
+    };
+
+    return fetch(
+      "https://localhost:5001/api/users?email=dblackhurst6@last.com",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json", // Set the correct content type
+        },
+        body: JSON.stringify(requestData), // Convert your data to JSON format
+      }
+    )
       .then((res) => res.json())
       .then((user) => {
         console.log("User found:", user); // log the user data
