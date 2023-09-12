@@ -81,46 +81,39 @@ import { Link, useHistory } from "react-router-dom";
 import "./Login.css";
 
 export const Login = () => {
-  const [email, set] = useState("");
+  const [email, setEmail] = useState("");
   const existDialog = useRef();
   const history = useHistory();
 
-  // const existingUserCheck = () => {
-  //   console.log("Checking for user with email:", email); // to check the value of email
-  //   // const email = "hardcoded-email@example.com";
-  //   return fetch(`/api/users?email=${email}`)
-  //     .then((res) => res.json())
-  //     .then((user) => {
-  //       console.log("User found:", user); // log the user data
-  //       return user.length ? user[0] : false;
-  //     });
-  // };
+  const existingUserCheck = (email) => {
+    console.log("Checking for user with email:", email);
+    const apiUrl = `https://localhost:5001/api/users/?email=${email}`;
 
-  const existingUserCheck = () => {
-    console.log("Checking for user with email:", email); // to check the value of email
+    return fetch(apiUrl)
+      .then((res) => {
+        if (res.status === 404) {
+          // User not found, handle this case appropriately
+          throw new Error("User not found");
+        }
+        if (!res.ok) {
+          throw new Error(`Fetch error: ${res.status} - ${res.statusText}`);
+        }
+        return res.json();
+      })
 
-    // Create an object with the email
-    const requestData = {
-      email: email, // Replace with your email variable
-    };
-
-    return fetch("https://localhost:5001/api/users?email=email@email.com", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json", // Set the correct content type
-      },
-      body: JSON.stringify(requestData), // Convert your data to JSON format
-    })
-      .then((res) => res.json())
       .then((user) => {
-        console.log("User found:", user); // log the user data
+        console.log("User found:", user);
         return user.length ? user[0] : false;
+      })
+      .catch((error) => {
+        console.error("Fetch error:", error);
+        // Handle the error as needed (e.g., display an error message to the user)
       });
   };
 
   const handleLogin = (e) => {
     e.preventDefault();
-    existingUserCheck().then((exists) => {
+    existingUserCheck(email).then((exists) => {
       if (exists) {
         console.log(exists);
         localStorage.setItem("goal_keeper", exists.id);
@@ -165,7 +158,7 @@ export const Login = () => {
             <label htmlFor="inputEmail"> Email address </label>
             <input
               type="email"
-              onChange={(evt) => set(evt.target.value)}
+              onChange={(evt) => setEmail(evt.target.value)}
               className="form-control"
               placeholder="Email address"
               required
