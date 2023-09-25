@@ -22,9 +22,20 @@ namespace Goalify.Controllers
             return Ok(_usersRepository.GetAll());
         }
 
-        // https://localhost:5001/api/users/email/
+
+        //// https://localhost:5001/api/users/email/
+        //[HttpGet("{email}")]
+        //public IActionResult Get(Users email)
+        //{
+        //    var user = _usersRepository.Get(email);
+        //    if (user == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(email);
+        //}
         [HttpGet("{email}")]
-        public IActionResult Get(Users email)
+        public IActionResult Get(string email)
         {
             var user = _usersRepository.Get(email);
             if (user == null)
@@ -33,6 +44,8 @@ namespace Goalify.Controllers
             }
             return Ok(user);
         }
+
+
 
         // https://localhost:5001/api/users/
         [HttpPost]
