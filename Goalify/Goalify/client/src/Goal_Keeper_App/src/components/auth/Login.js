@@ -88,31 +88,34 @@ export const Login = () => {
   const existingUserCheck = (email) => {
     console.log("Checking for user with email:", email);
     // const apiUrl = `https://localhost:5001/api/users/?email=${email}`;
-    const apiUrl = `https://localhost:5001/api/users/${encodeURIComponent(email)}`;
+    const apiUrl = `https://localhost:5001/api/users/${encodeURIComponent(
+      email
+    )}`;
 
-return fetch(apiUrl, {
-  method: "GET", // Specify the method as "GET"
-})
-  .then((res) => {
-    if (res.status === 404) {
-      // User not found, handle this case appropriately
-      throw new Error("User not found");
-    }
-    if (!res.ok) {
-      throw new Error(`Fetch error: ${res.status} - ${res.statusText}`);
-    }
-    return res.json();
-  })
-  .then((user) => {
-    console.log("User found:", user);
-    return user.length ? user[0] : false;
-  })
-  .catch((error) => {
-    console.error("Fetch error:", error);
-    // Handle the error as needed (e.g., display an error message to the user)
-  });
+    return fetch(apiUrl, {
+      method: "GET", // Specify the method as "GET"
+    })
+      .then((res) => {
+        if (res.status === 404) {
+          // User not found, handle this case appropriately
+          throw new Error("User not found");
+        }
+        if (!res.ok) {
+          throw new Error(`Fetch error: ${res.status} - ${res.statusText}`);
+        }
+        return res.json();
+      })
+      .then((user) => {
+        console.log("User found:", user);
+        return user.length ? user[0] : false;
+      })
+      .catch((error) => {
+        console.error("Fetch error:", error);
+        // Handle the error as needed (e.g., display an error message to the user)
+      });
+  };
 
-
+  // Move handleLogin outside of existingUserCheck
   const handleLogin = (e) => {
     e.preventDefault();
     existingUserCheck(email).then((exists) => {
