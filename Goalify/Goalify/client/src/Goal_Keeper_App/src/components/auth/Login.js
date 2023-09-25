@@ -88,6 +88,7 @@ export const Login = () => {
   const existingUserCheck = (email) => {
     console.log("Checking for user with email:", email);
     const apiUrl = `https://localhost:5001/api/users/?email=${email}`;
+    console.log(apiUrl);
 
     return fetch(apiUrl)
       .then((res) => {
