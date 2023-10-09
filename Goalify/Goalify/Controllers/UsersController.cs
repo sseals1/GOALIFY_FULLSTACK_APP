@@ -35,7 +35,7 @@ namespace Goalify.Controllers
         //    return Ok(email);
         //}
         [HttpGet("{email}")]
-        public IActionResult Get(string email)
+        public IActionResult Get(Users email)
         {
             var user = _usersRepository.Get(email);
             if (user == null)
