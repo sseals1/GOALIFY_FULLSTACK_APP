@@ -10,7 +10,7 @@ namespace Goalify.Repositories
         void Update(Users user);
         Users Get(Users email);
         List<Users> GetAll();
-       
+        string Get(string email);
     }
     
 }
