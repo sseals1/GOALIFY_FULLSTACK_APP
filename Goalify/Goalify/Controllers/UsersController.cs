@@ -37,9 +37,9 @@ namespace Goalify.Controllers
 
         //https://localhost:5001/api/users/email
         [HttpGet("{email}")]
-        public IActionResult Get(Users email)
+        public IActionResult Get(string email)
         {
-            Users user = _usersRepository.Get(email);
+            string user = _usersRepository.Get(email);
             if (user == null)
             {
                 return NotFound();
