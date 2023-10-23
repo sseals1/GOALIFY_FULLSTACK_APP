@@ -195,8 +195,8 @@ export const Login = () => {
     console.log("Checking for user with email:", email);
     const apiUrl = `https://localhost:5001/api/users/${encodeURIComponent(
       email
-      )}`;
-      console.log(apiUrl)
+    )}`;
+    console.log(apiUrl);
 
     return fetch(apiUrl, {
       method: "GET", // Specify the method as "GET"

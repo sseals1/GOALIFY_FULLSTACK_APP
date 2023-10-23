@@ -21,29 +21,19 @@ namespace Goalify.Controllers
         {
             return Ok(_usersRepository.GetAll());
         }
-
-
-
-        //[HttpGet("{email}")]
-        //public IActionResult Get(Users email)
-        //{
-        //    var user = _usersRepository.Get(email);
-        //    if (user == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok(user);
-        //}
+        
 
         //https://localhost:5001/api/users/email
         [HttpGet("{email}")]
         public IActionResult Get(string email)
         {
-            string user = _usersRepository.Get(email);
+            Users user = _usersRepository.Get(email);
+
             if (user == null)
             {
                 return NotFound();
             }
+
             return Ok(user);
         }
 
