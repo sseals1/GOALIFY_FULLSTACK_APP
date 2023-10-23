@@ -8,9 +8,9 @@ namespace Goalify.Repositories
         void Add(Users user);
         void Delete(int Id);
         void Update(Users user);
-        Users Get(Users email);
+        //Users Get(Users email);
         List<Users> GetAll();
-        string Get(string email);
+        Users Get(string email);
     }
     
 }
