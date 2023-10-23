@@ -209,7 +209,38 @@ namespace Goalify.Repositories
             }
         }
 
-        public Users Get(string email) // Change the parameter type to string
+        //public Users Get(string email) // Change the parameter type to string
+        //{
+        //    using (var conn = Connection)
+        //    {
+        //        conn.Open();
+        //        using (var cmd = conn.CreateCommand())
+        //        {
+        //            cmd.CommandText = @"
+        //                SELECT Id, Name, Email, Address
+        //                FROM Users
+        //                WHERE Email = @email;";
+        //            cmd.Parameters.AddWithValue("@email", email);
+
+        //            using (SqlDataReader reader = cmd.ExecuteReader())
+        //            {
+        //                Users email = null;
+        //                if (reader.Read())
+        //                {
+        //                    email = new Users()
+        //                    {
+        //                        Id = DbUtils.GetInt(reader, "Id"),
+        //                        Name = DbUtils.GetString(reader, "Name"),
+        //                        Email = DbUtils.GetString(reader, "Email"),
+        //                        Address = DbUtils.GetString(reader, "Address"),
+        //                    };
+        //                }
+        //                return user;
+        //            }
+        //        }
+        //    }
+        //}
+        public Users Get(string email)
         {
             using (var conn = Connection)
             {
@@ -217,9 +248,9 @@ namespace Goalify.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT Id, Name, Email, Address
-                        FROM Users
-                        WHERE Email = @email;";
+                SELECT Id, Name, Email, Address
+                FROM Users
+                WHERE Email = @email;";
                     cmd.Parameters.AddWithValue("@email", email);
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -235,11 +266,12 @@ namespace Goalify.Repositories
                                 Address = DbUtils.GetString(reader, "Address"),
                             };
                         }
-                        return user;
+                        return user; // Make sure to return a Users object
                     }
                 }
             }
         }
+
 
         public void Add(Users user)
         {
