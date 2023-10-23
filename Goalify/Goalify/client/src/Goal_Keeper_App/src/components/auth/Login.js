@@ -225,8 +225,9 @@ export const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     existingUserCheck(email).then((exists) => {
-      if (exists) {
-        console.log(exists);
+      if (exists !== null) {
+        // User exists
+        console.log("User exists:", exists);
         localStorage.setItem("goal_keeper", exists.id);
         console.log("Setting goal_keeper:", exists.id);
         history.push("/goalform");
