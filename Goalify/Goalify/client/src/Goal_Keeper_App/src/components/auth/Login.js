@@ -3,7 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import "./Login.css";
 
 export const Login = () => {
-  const [email, set] = useState("");
+  const [email, setEmail] = useState("");
   const existDialog = useRef();
   const history = useHistory();
 
@@ -15,9 +15,10 @@ export const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    existingUserCheck().then((exists) => {
-      if (exists) {
-        localStorage.setItem("goal_keeper", exists.id);
+    existingUserCheck().then((user) => {
+      if (user) {
+        console.log(user);
+        localStorage.setItem("goal_keeper", user.id);
         history.push("/goalform");
       } else {
         existDialog.current.showModal();
@@ -57,7 +58,7 @@ export const Login = () => {
             <label htmlFor="inputEmail"> Email address </label>
             <input
               type="email"
-              onChange={(evt) => set(evt.target.value)}
+              onChange={(evt) => setEmail(evt.target.value)}
               className="form-control"
               placeholder="Email address"
               required
