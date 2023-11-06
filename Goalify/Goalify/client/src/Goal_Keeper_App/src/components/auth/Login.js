@@ -10,15 +10,20 @@ export const Login = () => {
   const existingUserCheck = () => {
     return fetch(`/api/users?email=${email}`)
       .then((res) => res.json())
-      .then((user) => (user.length ? user[0] : false));
+      .then((users) => {
+        const user = users.find((u) => u.email === email);
+        return user ? user : null;
+      });
   };
-
+  console.log(email);
   const handleLogin = (e) => {
     e.preventDefault();
     existingUserCheck().then((user) => {
       if (user) {
         console.log(user);
-        localStorage.setItem("goal_keeper", user.id);
+        const userId = Number(user.id);
+        console.log(userId);
+        localStorage.setItem("goal_keeper", userId);
         history.push("/goalform");
       } else {
         existDialog.current.showModal();
