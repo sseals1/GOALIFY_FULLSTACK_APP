@@ -27,7 +27,7 @@ namespace Goalify.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT Id, Category, ColorId
+                    cmd.CommandText = @"SELECT Id, Category, ColorId, Color
                         FROM Categories";
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -38,7 +38,8 @@ namespace Goalify.Repositories
                             {
                                 Id = DbUtils.GetInt(reader, "Id"),
                                 Category = DbUtils.GetString(reader, "Category"),
-                                ColorId = DbUtils.GetString(reader, "ColorId")
+                                ColorId = DbUtils.GetString(reader, "ColorId"),
+                                Color = DbUtils.GetString(reader, "Color"),
                             });
                             //if (!reader.IsDBNull(reader.GetOrdinal("Notes")))
                             //{

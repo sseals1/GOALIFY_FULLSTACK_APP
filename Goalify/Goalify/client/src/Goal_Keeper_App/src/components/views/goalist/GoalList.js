@@ -169,20 +169,6 @@ export const GoalList = () => {
                               ) || {}
                             ).colorId}
                         </Button>
-
-                        {/* <Button
-                          className="drop-btn"
-                          style={{
-                            background: `${
-                              goal.categoryId && goal.categoryId.colorId
-                                ? goal.categoryId.colorId
-                                : "#ccc"
-                            }`,
-                          }}
-                          disabled
-                        >
-                          {goal.categoryId && goal.categoryId.colorId}
-                        </Button> */}
                       </Col>
                     </Row>
                   </Container>
