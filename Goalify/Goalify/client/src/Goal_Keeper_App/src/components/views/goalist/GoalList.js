@@ -114,10 +114,7 @@ export const GoalList = () => {
                             <div>Goal objectives: {goal.goalObjectives}</div>
                             <div>Notes: {goal.notes}</div>
                             <div>Note updates: {goal.goalNotes}</div>
-                            <div>
-                              Projected Completion Date:{" "}
-                              {unixTime(goal.goalDate)}
-                            </div>
+                            <div>Complete By: {unixTime(goal.goalDate)}</div>
                           </div>
                         </Link>
                         <div className="edit-btn-container">
