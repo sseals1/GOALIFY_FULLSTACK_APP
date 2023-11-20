@@ -116,7 +116,10 @@ export const GoalList = () => {
                     <Row xs={12}>
                       <Col className="goal_list1" md={8}>
                         <Link onClick={saveMilestone} to={`/goals/${goal.id}`}>
-                          <div className="goal_props">
+                          <div
+                            className="goal_props"
+                            style={{ color: "black" }}
+                          >
                             <div>Goal description: {goal.goalDescription}</div>
                             <div>Goal objectives: {goal.goalObjectives}</div>
                             <div>Notes: {goal.notes}</div>
