@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getMilestones, ListOfGoals } from "../../ApiManager";
+import { GetCategories, getMilestones, ListOfGoals } from "../../ApiManager";
 import "./GoalList.css";
 import { Link, useParams, useHistory } from "react-router-dom";
 import { Col, Container, Row, Button } from "react-bootstrap";
@@ -10,12 +10,19 @@ export const GoalList = () => {
   const { goalsId } = useParams();
   console.log(goalsId);
   const [milestone, setMilestone] = useState({});
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    GetCategories().then((data) => {
+      setCategories(data);
+      console.log(data);
+    });
+  }, []);
 
   useEffect(() => {
     ListOfGoals().then((data) => {
       setGoalList(
         data.filter((item) => {
-          console.log(item);
           console.log(localStorage.getItem("goal_keeper"));
           return item.userId === parseInt(localStorage.getItem("goal_keeper"));
         })
@@ -141,17 +148,38 @@ export const GoalList = () => {
                           className="drop-btn"
                           style={{
                             background: `${
-                              goal.categoryid && goal.categoryid.color
-                                ? goal.categoryid.color
+                              categories.length > 0
+                                ? (
+                                    categories.find(
+                                      (c) => c.id === goal.categoryId
+                                    ) || {}
+                                  ).colorId || "#ccc"
                                 : "#ccc"
                             }`,
                           }}
                           disabled
                         >
-                          {goal.category && goal.category.category}
+                          {categories.length > 0 &&
+                            (
+                              categories.find(
+                                (c) => c.id === goal.categoryId
+                              ) || {}
+                            ).colorId}
                         </Button>
 
-                        {console.log(goal.categoryid.color)}
+                        {/* <Button
+                          className="drop-btn"
+                          style={{
+                            background: `${
+                              goal.categoryId && goal.categoryId.colorId
+                                ? goal.categoryId.colorId
+                                : "#ccc"
+                            }`,
+                          }}
+                          disabled
+                        >
+                          {goal.categoryId && goal.categoryId.colorId}
+                        </Button> */}
                       </Col>
                     </Row>
                   </Container>
