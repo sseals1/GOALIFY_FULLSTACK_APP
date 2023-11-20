@@ -24,7 +24,7 @@ export const Login = () => {
         const userId = Number(user.id);
         console.log(userId);
         localStorage.setItem("goal_keeper", userId);
-        history.push("/goalform");
+        history.push("/mygoals");
       } else {
         existDialog.current.showModal();
       }
