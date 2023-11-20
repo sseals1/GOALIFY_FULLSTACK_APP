@@ -54,7 +54,7 @@ export const getTips = (tipsId) => {
   return fetch(`/api/tips/${tipsId}`).then((res) => res.json());
 };
 
-export const getCategories = () => {
+export const GetCategories = () => {
   return fetch(`/api/categories`).then((res) => res.json());
 };
 
