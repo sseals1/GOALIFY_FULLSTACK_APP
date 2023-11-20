@@ -9,6 +9,7 @@ namespace Goalify.Models
         public int Id { get; set; } 
         public string Category { get; set; }
         public string ColorId { get; set; }
+        public string Color { get; set; }
 
     }
 }

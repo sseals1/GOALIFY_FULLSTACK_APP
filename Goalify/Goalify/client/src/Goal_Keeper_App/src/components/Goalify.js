@@ -67,7 +67,7 @@ export const Goalify = () => (
                   <header
                     style={{ backgroundColor: "#f3f3f3", padding: "10px" }}
                   >
-                    <h1 style={{ margin: "0" }}>Goalify</h1>
+                    {/* <h1 style={{ margin: "50" }}>Goalify</h1> */}
                   </header>
                   <div style={{ padding: "20px" }}>
                     <ApplicationViews />

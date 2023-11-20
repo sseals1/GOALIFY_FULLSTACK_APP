@@ -34,7 +34,7 @@ export const NavigationBar = () => {
           className="justify-content-between"
         >
           <Container>
-            <Navbar.Brand href="/home">Goalify</Navbar.Brand>
+            <Navbar.Brand href="/home">GOALIFY</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="me-auto">
