@@ -111,7 +111,7 @@ export const YearInReview = () => {
           const currentMilestone = milestoneChecker(goalObj.id);
 
           return (
-            <>
+            <React.Fragment key={goalObj.id}>
               <div className="goal_list" key={goalObj.id} goalobj={goalObj}>
                 <Container>
                   <Row>
@@ -273,7 +273,7 @@ export const YearInReview = () => {
                   </Row>
                 </Container>
               </div>
-            </>
+            </React.Fragment>
           );
         })
         .reverse()}
