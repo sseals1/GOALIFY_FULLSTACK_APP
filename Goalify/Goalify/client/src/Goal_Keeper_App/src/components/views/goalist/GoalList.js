@@ -130,15 +130,25 @@ export const GoalList = () => {
                         <div className="edit-btn-container">
                           <Button
                             className="edit_goal-btn btn btn-secondary custom-margin" // Add the custom-margin class
+                            // style={{
+                            //   borderRadius: "50%", // Set border radius to create a circle
+                            //   width: "70px", // Set a fixed width (adjust as needed)
+                            //   height: "70px", // Set a fixed height (adjust as needed)
+                            // }}
                             onClick={() => {
                               history.push(`/goalnotes/${goal.id}`);
                             }}
                           >
                             EDIT
                           </Button>
-
+                          <div></div>
                           <Button
                             className="edit_goal-btn btn btn-danger" // Keep class as "btn-danger" for red color
+                            // style={{
+                            //   borderRadius: "50%", // Set border radius to create a circle
+                            //   width: "70px", // Set a fixed width (adjust as needed)
+                            //   height: "70px", // Set a fixed height (adjust as needed)
+                            // }}
                             onClick={() => {
                               deleteGoal(goal.id);
                             }}
@@ -146,7 +156,6 @@ export const GoalList = () => {
                             DELETE
                           </Button>
                         </div>
-
                         <Button
                           className="drop-btn"
                           style={{
@@ -168,6 +177,21 @@ export const GoalList = () => {
                                 (c) => c.id === goal.categoryId
                               ) || {}
                             ).colorId}
+                        </Button>
+
+                        <Button
+                          className="edit_goal-btn btn btn-secondary custom-margin" // Add the custom-margin class
+                          style={{
+                            background: "teal",
+                            // borderRadius: "50%",
+                            // Set border radius to create a circle
+                            width: "70px", // Set a fixed width (adjust as needed)
+                            height: "70px", // Set a fixed height (adjust as needed)
+                          }}
+                          disabled
+                        >
+                          {"PRIORITY"}
+                          <div>{goal.priorityId}</div>
                         </Button>
                       </Col>
                     </Row>
