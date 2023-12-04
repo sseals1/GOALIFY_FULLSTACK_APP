@@ -190,7 +190,7 @@ export const GoalList = () => {
                           }}
                           disabled
                         >
-                          {"PRIORITY"}
+                          {"Priority"}
                           <div>{goal.priorityId}</div>
                         </Button>
                       </Col>

@@ -182,7 +182,11 @@ export const YearInReview = () => {
                             className="dirbx"
                             type="checkbox"
                             label="Overall Direction"
-                            checked={currentMilestone.direction}
+                            checked={
+                              currentMilestone
+                                ? currentMilestone.direction
+                                : false
+                            }
                             disabled
                           />
                         ) : (
@@ -197,7 +201,11 @@ export const YearInReview = () => {
                             className="dirbx"
                             type="checkbox"
                             label="Overall Direction"
-                            checked={currentMilestone.defined}
+                            checked={
+                              currentMilestone
+                                ? currentMilestone.direction
+                                : false
+                            }
                             disabled
                           />
                         ) : (
@@ -212,7 +220,11 @@ export const YearInReview = () => {
                             className="dirbx"
                             type="checkbox"
                             label="Overall Direction"
-                            checked={currentMilestone.progress}
+                            checked={
+                              currentMilestone
+                                ? currentMilestone.direction
+                                : false
+                            }
                             disabled
                           />
                         ) : (
@@ -227,7 +239,11 @@ export const YearInReview = () => {
                             className="dirbx"
                             type="checkbox"
                             label="Overall Direction"
-                            checked={currentMilestone.features}
+                            checked={
+                              currentMilestone
+                                ? currentMilestone.direction
+                                : false
+                            }
                             disabled
                           />
                         ) : (
@@ -242,7 +258,11 @@ export const YearInReview = () => {
                             className="dirbx"
                             type="checkbox"
                             label="Overall Direction"
-                            checked={currentMilestone.attained}
+                            checked={
+                              currentMilestone
+                                ? currentMilestone.direction
+                                : false
+                            }
                             disabled
                           />
                         ) : (
@@ -260,16 +280,3 @@ export const YearInReview = () => {
     </>
   );
 };
-
-// <button
-//   key={"key4"}
-//   className="cat-btn"
-//   style={{ background: `${goalObj.category?.color}` }}
-//   >
-//   {goalObj.category?.category}
-// hello
-// </button>
-
-// <button className="test-btn">
-//   test
-// </button>
